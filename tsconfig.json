@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+      "target": "ES2020",                         /* creating a new app, older browsers are not needed */
+      "strict": true,                             /* enable strict types and JS */
+      "module": "ES2020",                         /* using more modern module imports */
+      "esModuleInterop": true,                    /* and allowSyntheticDefaultImports for Babel */
+      "moduleResolution": "node",                 /* using node and npm for this project */
+      "resolveJsonModule": true,                  /* when dealing with JSON files removes complexity */
+      "isolatedModules": true,                    /* allow individual modules to be transpiled */
+      "jsx": "react-jsx",                         /* for React JSX compatibility */
+      "noEmit": true,                             /* using Babel, this is also overrriden in the Babel server config */
+      "allowSyntheticDefaultImports": true,       /* and esModuleInterop for Babel */
+      "forceConsistentCasingInFileNames": true,   /* more for safety in team or cross-platform environments */
+      "skipLibCheck": false,                      /* check d.ts files if they exist */
+      "lib": ["dom", "dom.iterable", "esnext"]    /* restrict libraries and reduce bloat */
+    },
+    "include": ["src/**/*"]                       /* include anything in src folder when searching for file to transpile */
+  }
+  
