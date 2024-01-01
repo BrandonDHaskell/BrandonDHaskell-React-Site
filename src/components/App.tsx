@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Profile from "./Profile";
+import profilePic from "../images/Profile_Pic_2_small.jpg";
 
 interface AppProps {
     message: string
@@ -20,6 +22,10 @@ class App extends Component<AppProps, AppState> {
         return (
             <div className="App">
                 <h1>{this.props.message}</h1>
+                <Profile
+                    imageSrc={profilePic}
+                    blurb="A little bit about me!"
+                />
             </div>
         )
     }
