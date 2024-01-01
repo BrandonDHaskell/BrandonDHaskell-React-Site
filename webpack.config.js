@@ -7,7 +7,9 @@ module.exports = {
         new HTMLWebpackPlugin({
             template: "./src/index.html"
         }),
-        new MiniCssExtractPlugin()
+        new MiniCssExtractPlugin({
+            filename: "style.css"
+        })
     ],
     module: {
         rules: [

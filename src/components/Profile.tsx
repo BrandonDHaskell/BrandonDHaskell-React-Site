@@ -8,7 +8,13 @@ interface ProfileProps {
 const Profile: React.FC<ProfileProps> = ({ imageSrc, blurb }) => {
     return (
         <div>
-            <img src={imageSrc} alt="Profile" />
+            <img 
+                id="profile-pic"
+                src={imageSrc}
+                alt="Profile"
+                className="px-6"
+                style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }}
+            />
             <p>{blurb}</p>
         </div>
     )
