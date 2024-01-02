@@ -12,3 +12,5 @@ const Projects: React.FC<ProjectProps> = () => {
 
     )
 }
+
+export default Projects;
