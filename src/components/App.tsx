@@ -21,7 +21,6 @@ class App extends Component<AppProps, AppState> {
     render() {
         return (
             <div className="App">
-                <h1>{this.props.message}</h1>
                 <Profile
                     imageSrc={profilePic}
                     blurb="A little bit about me!"

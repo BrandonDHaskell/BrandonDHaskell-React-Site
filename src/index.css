@@ -3,7 +3,7 @@
 @import "tailwindcss/utilities";
 
 #profile-pic {
-    border-radius: 15%;
+    border-radius: 25%;
     width: 312px;
     height: 312px;
 }
