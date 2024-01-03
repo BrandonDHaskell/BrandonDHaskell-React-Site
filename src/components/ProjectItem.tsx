@@ -26,7 +26,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
                     <img className="rounded boarder-2 border-stone-900" src={imgSrc} alt={name} />
                     <div className="flex flex-wrap justify-center py-1">
                         {techList.map((tech, index) => (
-                            <div><span className="box-decoration-clone bg-gradient-to-r from-yellow-600 to-sky-700 px-2 mx-2 rounded-lg">{tech}</span></div>
+                            <div key={index}><span className="box-decoration-clone bg-gradient-to-r from-yellow-600 to-sky-700 px-2 mx-2 rounded-lg">{tech}</span></div>
                         ))}
                     </div>
                 </div>
