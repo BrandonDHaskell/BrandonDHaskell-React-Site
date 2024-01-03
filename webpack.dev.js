@@ -6,9 +6,15 @@ module.exports = merge(webpackConfig, {
     mode: "development",
     entry: "./src/index.tsx",
     devServer: {
-        static: {
-            directory: path.join(__dirname, "dist")
-        },
+        static: [
+            {
+                directory: path.join(__dirname, "public"),
+                publicPath: "/"
+            },
+            {
+                directory: path.join(__dirname, "dist")
+            }
+        ],
         compress: true,
         port: 3000,
         open: true,
