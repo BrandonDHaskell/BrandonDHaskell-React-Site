@@ -37,3 +37,5 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
         </div>
     )
 }
+
+export default ProjectItem;
