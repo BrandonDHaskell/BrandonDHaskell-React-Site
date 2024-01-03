@@ -1,6 +1,6 @@
 {
   "homepage": "https://brandondhaskell.github.io/BrandonDHaskell-React-Site/",
-    "name": "brandondhaskell-react-site",
+  "name": "brandondhaskell-react-site",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -14,6 +14,7 @@
     "deploy": "gh-pages -d build"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
