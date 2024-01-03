@@ -1,5 +1,6 @@
 {
-  "name": "brandondhaskell-react-site",
+  "homepage": "https://brandondhaskell.github.io/brandondhaskell-react-site",
+    "name": "brandondhaskell-react-site",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,7 +13,9 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "@babel/core": "^7.23.7",
@@ -25,6 +28,7 @@
     "babel-loader": "^9.1.3",
     "css-loader": "^6.8.1",
     "file-loader": "^6.2.0",
+    "gh-pages": "^6.1.1",
     "html-webpack-plugin": "^5.6.0",
     "mini-css-extract-plugin": "^2.7.6",
     "postcss": "^8.4.32",
