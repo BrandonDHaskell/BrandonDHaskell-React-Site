@@ -1,0 +1,32 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "personal site server",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf build/ && tsc",
+    "start": "NODE_ENV=production node ./build/server.js",
+    "dev": "ts-node-dev ./src/server.ts"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.6",
+    "dotenv": "^16.3.1",
+    "nodemon": "^3.0.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrandonDHaskell/BrandonDHaskell-React-Site.git"
+  },
+  "author": "BrandonDHaskell",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BrandonDHaskell/BrandonDHaskell-React-Site/issues"
+  },
+  "homepage": "https://github.com/BrandonDHaskell/BrandonDHaskell-React-Site#readme"
+}
