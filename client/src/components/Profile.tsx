@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import profileImg from "../images/Profile_Pic_2_small.jpg";
 
 const Profile: React.FC = () => {
     return (
@@ -8,7 +9,7 @@ const Profile: React.FC = () => {
                 <div className="p-6 basis-1">
                     <img 
                         id="profile-pic"
-                        src="images/Profile_Pic_2_small.jpg"
+                        src={profileImg}
                         alt="Profile"
                         className="w-full aspect-square rounded-3xl object-none object-center"
                         style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }}
