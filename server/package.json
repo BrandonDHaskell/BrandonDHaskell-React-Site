@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "personal site server",
   "main": "index.js",
-  "proxy": "http://localhost:30001/"
   "scripts": {
     "build": "rm -rf build/ && tsc",
     "start": "NODE_ENV=production node ./build/server.js",
