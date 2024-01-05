@@ -45,15 +45,10 @@ module.exports = {
             },
             {
                 test: /\.(png|jpe?g|gif|svg)$/i,
-                use: [
-                    {
-                        loader: "file-loader",
-                        options: {
-                            outputPath: "images",
-                            name: "[name].[ext]"
-                        }
-                    }
-                ]
+                type: "asset/resource",
+                generator: {
+                    filename: "images/[name][ext][query]"
+                }
             }
         ]
     },
