@@ -4,8 +4,8 @@
   "description": "personal site server",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf build/ && tsc",
-    "start": "NODE_ENV=production node ./build/server.js",
+    "build": "tsc",
+    "start": "node ./build/server.js",
     "dev": "ts-node-dev ./src/server.ts"
   },
   "dependencies": {
