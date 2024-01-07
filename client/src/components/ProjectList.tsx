@@ -1,10 +1,10 @@
 import React from "react";
 import ProjectItem from "./ProjectItem";
-import pswdGeneratorImg from "../images/pswd-generator.png";
-import knowYourGovtImg from "../images/know-your-government.png";
-import dailySchedulerImg from "../images/day-scheduler.png";
-import quizTimeImg from "../images/quiz-time.png";
-import weatherPlanner from "../images/weather-planner.png";
+import pswdGeneratorImg from "../images/pswd-generator.webp";
+import knowYourGovtImg from "../images/know-your-government.webp";
+import dailySchedulerImg from "../images/day-scheduler.webp";
+import quizTimeImg from "../images/quiz-time.webp";
+import weatherPlanner from "../images/weather-planner.webp";
 
 interface Project {
     name: string,
