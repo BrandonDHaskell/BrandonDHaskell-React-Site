@@ -27,8 +27,8 @@ const EmailMe: React.FC = () => {
 
     return (
         <section id="connect-with-me" className="column justify-center">
-            <h2 className="mb-8 mt-8 text 4xl font-bold md:text-5xl lg:text-6xl">Email Me</h2>
-            <p className="py-2">I believe in the transformative power of connection and I'm always open to sharing insights, collaboration, and exploring the vast potential of technology over a friendly cup of coffee or tea. Feel free to reachout!</p>
+            <h2 className="mb-8 mt-8 text-center text-4xl font-bold md:text-5xl lg:text-6xl">Email Me</h2>
+            <p className="py-2 max-w-[800px] mx-auto">I believe in the transformative power of connection and I'm always open to sharing insights, collaboration, and exploring the vast potential of technology over a friendly cup of coffee or tea. Feel free to reachout!</p>
             {emailSent ? (
                 <div>
                     <p>Email sent!</p>
@@ -41,7 +41,7 @@ const EmailMe: React.FC = () => {
                     {isSending ? (
                         <div className="sending-email">Sending email...</div>
                     ) : (
-                    <form onSubmit={sendEmail}>
+                    <form onSubmit={sendEmail} className="space-y-4">
                         <div className="flex justify-center outline-sky-500">
                             <div className="text-sky-500 px-2">
                                 <label htmlFor="name">Name</label>
@@ -66,7 +66,11 @@ const EmailMe: React.FC = () => {
                                 <textarea id="message" name="message" rows={5} required className="border-2 rounded border-slate-300 text-sky-500 px-2 m-2" />
                             </div>
                         </div>
-                        <button type="submit" className="m-2 px-4 py-2 font-semibold text-sm bg-white text-slate-700 border border-slate-300 rounded-md shadow-sm outline outline-2 outline-offset-0 outline-sky-500 dark:bg-slate-700 dark:text-slate-200 dark:border-transparent">Send</button>
+                        <div className="flex justify-center outline-sky-500">
+                            <div className="text-sky-500 px-2 pb-12">
+                                <button type="submit" className="m-2 px-12 py-2 font-semibold text-sm bg-white text-slate-700 border border-slate-300 rounded-md shadow-sm outline outline-2 outline-offset-0 outline-sky-500 dark:bg-slate-700 dark:text-slate-200 dark:border-transparent">Send</button>
+                            </div>
+                        </div>
                     </form>
                     )}
                 </>
