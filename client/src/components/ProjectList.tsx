@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ProjectItem from "./ProjectItem";
 import pswdGeneratorImg from "../images/pswd-generator.webp";
 import knowYourGovtImg from "../images/know-your-government.webp";
@@ -6,6 +6,7 @@ import dailySchedulerImg from "../images/day-scheduler.webp";
 import quizTimeImg from "../images/quiz-time.webp";
 import weatherPlanner from "../images/weather-planner.webp";
 
+// Interface for card data object
 interface Project {
     name: string,
     summary: string,
@@ -14,6 +15,33 @@ interface Project {
     sourceCodeLink: string,
     techList: string[]
 }
+
+// Preload single image
+const preLoadImage = (src: string) => {
+    return new Promise<void>((resolve, reject) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => resolve();
+        img.onerror = () => reject(new Error("Failed to load image at ${src}"));
+    });
+}
+
+// Preload images to fix browser NS_BINDING_ABORTED error
+const preLoadAssets = async () => {
+    const imageSources = [
+        pswdGeneratorImg,
+        knowYourGovtImg,
+        dailySchedulerImg,
+        quizTimeImg,
+        weatherPlanner
+    ];
+
+    try {
+        await Promise.all(imageSources.map(src => preLoadImage(src)));
+    } catch (error) {
+        console.error(error);
+    }
+};
 
 const projects: Project[] = [
     {
@@ -59,6 +87,15 @@ const projects: Project[] = [
 ]
 
 const ProjectList: React.FC = () => {
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        preLoadAssets().then(() => setLoading(false));
+    }, []);
+
+    if (loading) {
+        return <div>Loading...</div>
+    }
     return (
         <div className="project-list flex flex-wrap justify-center m-9">
             {projects.map((project, index) => (
