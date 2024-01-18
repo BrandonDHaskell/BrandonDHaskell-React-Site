@@ -54,7 +54,7 @@ const Profile: React.FC = () => {
      //  bg-white: Background color set to white.
 <section id="profile" className="bg-white">
     <div className="container mx-auto px-4">
-        <h1 className="text-3xl font-bold text-center py-4">Brandon D Haskell</h1>
+        <h1 className="text-4xl font-bold text-center py-4" style={{ fontFamily: 'JetBrains Mono, sans-serif' }}>Brandon D Haskell</h1>
         {/* Two-column layout for medium-sized screens and larger 
               - md:grid-cols-2: For medium-sized screens and larger, sets the grid to have 2 columns.
               - gap-1: Sets the gap between grid items to a size of 1.
