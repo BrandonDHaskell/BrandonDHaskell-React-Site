@@ -15,7 +15,6 @@ const Projects: React.FC<ProjectProps> = () => {
             {/* <h2 className="mb-8 mt-8 text-4xl font-bold md:txt-5xl lg:text-6xl text-sky-500">Projects</h2>*/}
             <ProjectList />
         </section>
-
     )
 }
 

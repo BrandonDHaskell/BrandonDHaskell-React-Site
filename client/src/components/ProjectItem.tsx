@@ -18,10 +18,10 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
     techList
 }) => {
     return (
-        <div className="project-card rounded p-8 m-6 max-w-xs ring-2 ring-offset-2 ring-stone-900 shadow-2xl shadow-gray-400/75 hover:shadow-sky-500">
+        <div className="project-card rounded p-8 m-6 max-w-xs ring-2 ring-offset-2 ring-stone-900 shadow-2xl shadow-gray-400/75 hover:shadow-sky-500 hover:scale-105 transform transition-transform duration-300">
             <a href={liveSiteLink} className="flex flex-col h-full">
                 <div className="project-info rounded flex-1">
-                    <h3 className="project-title">{name}</h3>
+                    <h3 className="project-title text-lg title-font text-center">{name}</h3>
                     <p className="project-desc text-sm italic pb-5">{summary}</p>
                     <img className="rounded border-2 mb-4" src={imgSrc} alt={name} />
                     <div className="flex flex-wrap justify-center py-1">
@@ -33,7 +33,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
                     </div>
                 </div>
                 <div className="flex justify-center text-skyl-400 py-3">
-                    <a href={sourceCodeLink} className="mt-auto">Source code</a>
+                    <a href={sourceCodeLink} className="mt-auto title-font">&lt; SOURCE CODE/ &gt;</a>
                 </div>
             </a>
         </div>
