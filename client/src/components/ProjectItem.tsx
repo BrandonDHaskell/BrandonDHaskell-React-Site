@@ -32,10 +32,10 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
                         ))}
                     </div>
                 </div>
-                <div className="flex justify-center text-skyl-400 py-3">
-                    <a href={sourceCodeLink} className="mt-auto title-font">&lt; SOURCE CODE/ &gt;</a>
-                </div>
             </a>
+            <div className="flex justify-center text-skyl-400 py-3">
+                <a href={sourceCodeLink} className="mt-auto title-font">&lt; SOURCE CODE/ &gt;</a>
+            </div>
         </div>
     );
 };
