@@ -101,7 +101,7 @@ const Profile: React.FC = () => {
 
                 {/* Work history and goals */}
                 <p ref={el => { if (el) paragraphsRef.current[2] = el; }} className="py-2">
-                    After a meaningful hiatus caring for a family member and relocating to San Francisco, I'm ready to return to my passion for technology. 
+                    After a taking time to care for a family member and relocating to San Francisco, I'm ready to return to my passion for technology. 
                     As I re-enter the workforce, I am on the lookout for opportunities where my skills as a fast learner and effective communicator can thrive. 
                     I am especially interested in roles that will allow me to contribute as a collaborative team player in Mobile and Web Development.
                 </p>
