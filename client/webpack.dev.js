@@ -18,6 +18,9 @@ module.exports = merge(webpackConfig, {
         compress: true,
         port: 3000,
         open: true,
-        hot: true
+        hot: true,
+        client: {
+            webSocketURL: "ws://localhost:8080/ws"
+        }
     }
 });
