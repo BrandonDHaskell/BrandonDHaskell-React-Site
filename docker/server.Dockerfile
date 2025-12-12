@@ -1,13 +1,15 @@
-FROM node:20
+FROM golang:1.25
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+# Install modules first (cached)
+COPY /go.mod ./
+RUN go mod download
 
+# Copy the server code
 COPY . .
 
-# If you compile TS
+EXPOSE 4000
 
-# For dev, src/ is mounted, and run nodemon/ts-node/etc
-CMD ["npm", "run", "dev"]
+# Dev command - rebuilds on changes when restarted; for hot reload
+CMD ["go", "run", "./cmd/api"]
