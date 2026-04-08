@@ -1,0 +1,33 @@
+[Unit]
+Description=BrandonDHaskell.com Go Server
+After=network.target
+
+[Service]
+Type=simple
+User=ec2-user
+Group=ec2-user
+WorkingDirectory=/opt/site
+ExecStart=/opt/site/server
+Restart=on-failure
+RestartSec=5
+
+# Environment
+Environment=GO_ENV=production
+Environment=PORT=4000
+Environment=STATIC_DIR=/opt/site/static
+EnvironmentFile=-/opt/site/.env
+
+# Hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/site
+PrivateTmp=true
+
+# Logging — view with: journalctl -u site
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=site
+
+[Install]
+WantedBy=multi-user.target
