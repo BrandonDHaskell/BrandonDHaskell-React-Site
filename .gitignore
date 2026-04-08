@@ -1,11 +1,22 @@
-node_modules
 # dependencies
-/node_modules
+node_modules/
 
 # production
-/build
-/dist
+build/
+
+# Deploy artifacts
+dist/
+
+# Server binary
+server/bin/
 
 # misc
 .DS_Store
 .vscode/
+
+# Server static build artifacts (populated at deploy time)
+server/static/
+
+# Environment files
+.env
+.env.local

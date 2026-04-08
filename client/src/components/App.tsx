@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Profile from "./Profile";
 import Projects from "./Projects";
-import EmailMe from "./EmailMe";
+import Contact from "./Contact";
 
 interface AppProps {
     message: string
@@ -24,7 +24,7 @@ class App extends Component<AppProps, AppState> {
             <div className="App">
                 <Profile />
                 <Projects />
-                <EmailMe />
+                <Contact />
             </div>
         )
     }
