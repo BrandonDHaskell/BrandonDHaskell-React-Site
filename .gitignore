@@ -5,6 +5,7 @@ node_modules/
 build/
 
 # Deploy artifacts
+deploy/
 dist/
 
 # Server binary
