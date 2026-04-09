@@ -6,7 +6,7 @@ const preLoadImage = (src: string) => {
         const img = new Image();
         img.src = src;
         img.onload = () => resolve();
-        img.onerror = () => reject(new Error("Failed to load image at ${src}"));
+        img.onerror = () => reject(new Error(`Failed to load image at ${src}`));
     });
 };
 
@@ -28,86 +28,39 @@ const Profile: React.FC = () => {
     }, []);
 
     return (
-    /**Tips from Chris Wan:
-     * You need to break down the project into more components
-     * Example: break the image and text into different components
-     */
-
-   
-    //  container: Sets the width to a responsive container width with padding.
-    //  mx-auto: Margin on the left and right set to auto, centering the container.
-    //  md:grid: For medium-sized screens and larger, enables a grid layout.
-    //  md:grid-cols-2: For medium-sized screens and larger, sets the grid to have 2 columns.
-    //  gap-1: Sets the gap between grid items to a size of 1.
-    //  p-6: Sets padding on all sides to a size of 6.
-    //  flex-shrink-0: Prevents the flex item from shrinking.
-    //  w-full: Sets the width to 100%.
-    //  aspect-square: Maintains an aspect ratio of 1:1 (square).
-    //  rounded-3xl: Sets rounded corners with a large radius.
-    //  object-cover: Scales the image as needed while maintaining its aspect ratio and cropping excess.
-    //  object-center: Centers the content of the flex container.
-    //  text-xl: Sets the text size to extra-large.
-    //  font-extrabold: Sets the font weight to extra bold.
-    //  py-2: Sets padding on the y-axis (top and bottom) to a size of 2.
-    //  text-left: Aligns the text to the left.
-
-     //  bg-white: Background color set to white.
-<section id="profile" className="bg-white">
-    <div className="container mx-auto px-4">
-        <h1 
-            className="text-4xl font-bold text-center py-8" 
-            style={{ fontFamily: 'JetBrains Mono, sans-serif' }}
-            >Brandon Haskell</h1>
-        {/* Two-column layout for medium-sized screens and larger 
-              - md:grid-cols-2: For medium-sized screens and larger, sets the grid to have 2 columns.
-              - gap-1: Sets the gap between grid items to a size of 1.
-
-        */}
-        <div className="md:grid md:grid-cols-2 gap-1">
-            {/* First column with profile picture 
-                  - p-6: Sets padding on all sides to a size of 6.
-                  - flex-shrink-0: Prevents the flex item from shrinking.
-            */}
-            <div className="p-6 flex-shrink-0">
-                {/* Profile picture */}
-                <img 
-                    id="profile-pic"
-                    src={profileImg}
-                    alt="Profile"
-                    // Responsive image styling
-                    className="w-full aspect-square rounded-3xl object-cover object-center"
-                    style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }}
-                />
+        <section id="profile" className="bg-white dark:bg-gray-900 transition-colors">
+            <div className="container mx-auto px-4">
+                <h1
+                    className="text-4xl font-bold text-center py-8 text-gray-900 dark:text-gray-100"
+                    style={{ fontFamily: 'JetBrains Mono, sans-serif' }}
+                >
+                    Brandon Haskell
+                </h1>
+                <div className="md:grid md:grid-cols-2 gap-1">
+                    <div className="p-6 flex-shrink-0">
+                        <img
+                            id="profile-pic"
+                            src={profileImg}
+                            alt="Profile"
+                            className="w-full aspect-square rounded-3xl object-cover object-center"
+                            style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }}
+                        />
+                    </div>
+                    <div className="flex-shrink-0 flex flex-col justify-items-center text-xl pt-8 px-6 text-gray-800 dark:text-gray-200">
+                        <p ref={el => { if (el) paragraphsRef.current[0] = el; }} className="pb-2">
+                            Hi, I'm <span className="text-xl font-extrabold">Brandon Haskell</span>
+                        </p>
+                        <p ref={el => { if (el) paragraphsRef.current[1] = el; }} className="py-2 text-left">
+                            I’m a technical systems and operations professional with 10+ years of experience at Amazon, including work in system administration, global support-routing configuration, data analysis, security and compliance coordination, user acceptance testing, and large-scale operational rollouts.
+                        </p>
+                        <p ref={el => { if (el) paragraphsRef.current[2] = el; }} className="py-2">
+                            I’ve worked across engineering, product, operations, legal, compliance, training, and data teams to launch, improve, and scale business-critical systems. Today, I’m focused on opportunities in automation, internal tools, business systems, technical solutions, and implementation, where I can combine technical breadth, structured problem-solving, and hands-on software development.
+                        </p>
+                    </div>
+                </div>
             </div>
-
-            {/* Second column with profile details
-                  - flex-shrink-0: Prevents the flex container from shrinking, ensuring it maintains its size.
-                  - flex: Establishes a flex container to organize child elements.
-                  - flex-col: Sets the flex container to be a column, arranging child elements vertically.
-                  - justify-items-center: Aligns the items along the cross-axis (vertical axis in this case) to the center.
-                  - text-sm: Sets the text size to small.
-            */}
-            <div className="flex-shrink-0 flex flex-col justify-items-center text-m pt-8 px-6">
-                {/* Introduction */}
-                <p ref={el => { if (el) paragraphsRef.current[0] = el; }} className="pb-2">
-                    Hi, I'm <span className="text-xl font-extrabold">Brandon Haskell</span>
-                </p>
-
-                {/* Additional details */}
-                <p ref={el => { if (el) paragraphsRef.current[1] = el; }} className="py-2 text-left">
-                    I’m a technical systems and operations professional with 10+ years of experience at Amazon, including work in system administration, global support-routing configuration, data analysis, security and compliance coordination, user acceptance testing, and large-scale operational rollouts.
-                </p>
-
-                {/* Work history and goals */}
-                <p ref={el => { if (el) paragraphsRef.current[2] = el; }} className="py-2">
-                    I’ve worked across engineering, product, operations, legal, compliance, training, and data teams to launch, improve, and scale business-critical systems. Today, I’m focused on opportunities in automation, internal tools, business systems, technical solutions, and implementation, where I can combine technical breadth, structured problem-solving, and hands-on software development.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-    )
-}
+        </section>
+    );
+};
 
 export default Profile;

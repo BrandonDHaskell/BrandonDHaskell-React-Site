@@ -4,8 +4,13 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600&family=Oxygen+Mono&display=swap');
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    font-family: 'Oxygen Mono', monospace; /* Default font  */
+    font-family: 'Oxygen Mono', monospace;
+    transition: background-color 0.3s, color 0.3s;
 }
   
 .title-font {

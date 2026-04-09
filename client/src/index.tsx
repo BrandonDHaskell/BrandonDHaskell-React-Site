@@ -10,8 +10,6 @@ const root = ReactDOM.createRoot(rootElement);
 
 root.render(
     <React.StrictMode>
-        <App 
-            message=""
-        />
+        <App />
     </React.StrictMode>
 );
