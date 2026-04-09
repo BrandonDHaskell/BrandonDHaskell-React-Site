@@ -29,12 +29,12 @@ const Contact: React.FC = () => {
                 >
                     GitHub — BrandonDHaskell
                 </a>
-                <a
+                {/* <a
                     href="mailto:brandon@brandondhaskell.com"
                     className="text-sky-600 hover:text-sky-800 title-font text-lg"
                 >
                     Email — brandon@brandondhaskell.com
-                </a>
+                </a> */}
             </div>
         </section>
     );
