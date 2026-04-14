@@ -16,6 +16,6 @@
     },
     "include": [
         "src/**/*",
-        "images.d.ts", "src/components", "index.tsx"]                       /* include anything in src folder when searching for file to transpile */
+        "images.d.ts"
+    ]
   }
-  

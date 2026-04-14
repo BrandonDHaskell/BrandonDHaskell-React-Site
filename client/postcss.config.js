@@ -1,14 +1,15 @@
+const isProduction = process.env.NODE_ENV === "production";
+
 module.exports = {
   plugins: {
     tailwindcss: {},
     autoprefixer: {},
-    cssnano: {
+    ...(isProduction && {
+      cssnano: {
         preset: ["default", {
-            discardComments: {
-                removeAll: true
-            }
-        }
-        ]
-    }
+          discardComments: { removeAll: true },
+        }],
+      },
+    }),
   },
-}
+};

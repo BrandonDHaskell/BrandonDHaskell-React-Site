@@ -1,7 +1,6 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600&family=Oxygen+Mono&display=swap');
 
 html {
@@ -16,4 +15,3 @@ body {
 .title-font {
     font-family: 'JetBrains Mono', monospace; 
 }
-  

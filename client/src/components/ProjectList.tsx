@@ -40,12 +40,7 @@ const ProjectList: React.FC = () => {
                 {projects.map((project) => (
                     <ProjectItem
                         key={project.name}
-                        name={project.name}
-                        summary={project.summary}
-                        imgSrc={project.imgSrc}
-                        liveSiteLink={project.liveSiteLink}
-                        sourceCodeLink={project.sourceCodeLink}
-                        techList={project.techList}
+                        project={project}
                         onClick={() => handleSelectProject(project)}
                     />
                 ))}

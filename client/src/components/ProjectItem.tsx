@@ -1,24 +1,14 @@
 import React from "react";
+import { ProjectDetailData } from "./ProjectDetail";
 
 interface ProjectItemProps {
-    name: string;
-    summary: string;
-    imgSrc?: string;
-    liveSiteLink?: string;
-    sourceCodeLink: string;
-    techList: string[];
+    project: ProjectDetailData;
     onClick: () => void;
 }
 
-const ProjectItem: React.FC<ProjectItemProps> = React.memo(({
-    name,
-    summary,
-    imgSrc,
-    liveSiteLink,
-    sourceCodeLink,
-    techList,
-    onClick
-}) => {
+const ProjectItem: React.FC<ProjectItemProps> = React.memo(({ project, onClick }) => {
+    const { name, summary, imgSrc, liveSiteLink, sourceCodeLink, techList } = project;
+
     return (
         <div
             className="project-card rounded-xl p-6 max-w-xs flex flex-col bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-700 shadow-md hover:shadow-sky-500/20 hover:ring-sky-500 hover:scale-105 transform transition-all duration-300 cursor-pointer"

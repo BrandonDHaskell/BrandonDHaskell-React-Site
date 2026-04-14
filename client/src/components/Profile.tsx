@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import profileImg from "../images/Profile_Pic_2_small.webp";
 import { preLoadImage } from "../utils/imagePreload";
 
@@ -6,28 +6,40 @@ const PARAGRAPH_COUNT = 3;
 const STAGGER_DELAY_MS = 250;
 
 const Profile: React.FC = () => {
-    const [imageLoaded, setImageLoaded] = useState(false);
     const [visibleParagraphs, setVisibleParagraphs] = useState<boolean[]>(
         Array(PARAGRAPH_COUNT).fill(false)
     );
 
+    // Track pending timeouts so they can be cancelled if the component unmounts
+    // mid-animation (e.g. during navigation or fast refresh in development).
+    const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+
     useEffect(() => {
+        let cancelled = false;
+
         preLoadImage(profileImg)
             .then(() => {
-                setImageLoaded(true);
+                if (cancelled) return;
 
                 // Stagger paragraph reveals through state, not DOM manipulation
                 for (let i = 0; i < PARAGRAPH_COUNT; i++) {
-                    setTimeout(() => {
+                    const id = setTimeout(() => {
                         setVisibleParagraphs((prev) => {
                             const next = [...prev];
                             next[i] = true;
                             return next;
                         });
                     }, STAGGER_DELAY_MS * i);
+                    timersRef.current.push(id);
                 }
             })
             .catch((error) => console.error(error));
+
+        return () => {
+            cancelled = true;
+            timersRef.current.forEach(clearTimeout);
+            timersRef.current = [];
+        };
     }, []);
 
     const slideClass = (index: number): string =>
