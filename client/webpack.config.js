@@ -5,10 +5,11 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
     plugins: [
         new HTMLWebpackPlugin({
-            template: "./src/index.html"
+            template: "./src/index.html",
+            favicon: "./src/images/Profile_Pic_2_small.webp"
         }),
         new MiniCssExtractPlugin({
-            filename: "style.css"
+            filename: "[name].[contenthash:8].css"
         })
     ],
     module: {
@@ -37,7 +38,7 @@ module.exports = {
                 test: /\.(png|jpe?g|gif|svg|webp)$/i,
                 type: "asset/resource",
                 generator: {
-                    filename: "images/[name][ext][query]"
+                    filename: "images/[name].[contenthash:8][ext][query]"
                 }
             }
         ]

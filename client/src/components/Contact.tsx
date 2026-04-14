@@ -4,11 +4,11 @@ import { GitHubIcon, LinkedInIcon } from "./Icons";
 const Contact: React.FC = () => {
     return (
         <section id="contact" className="bg-white dark:bg-gray-900 transition-colors">
-            <h1
+            <h2
                 className="title-font text-4xl font-bold text-center py-8 text-gray-900 dark:text-gray-100"
             >
                 CONNECT
-            </h1>
+            </h2>
             <p className="pt-2 pb-8 px-6 max-w-[800px] mx-auto text-gray-700 dark:text-gray-300">
                 I'm always open to sharing insights, collaborating, and exploring
                 the vast potential of technology. Feel free to reach out through
