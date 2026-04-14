@@ -41,7 +41,7 @@ const ProjectList: React.FC = () => {
                     <ProjectItem
                         key={project.name}
                         project={project}
-                        onClick={() => handleSelectProject(project)}
+                        onSelect={handleSelectProject}
                     />
                 ))}
             </div>

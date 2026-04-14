@@ -1,19 +1,31 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { ProjectDetailData } from "./ProjectDetail";
 
 interface ProjectItemProps {
     project: ProjectDetailData;
-    onClick: () => void;
+    onSelect: (project: ProjectDetailData) => void;
 }
 
-const ProjectItem: React.FC<ProjectItemProps> = React.memo(({ project, onClick }) => {
+const ProjectItem: React.FC<ProjectItemProps> = React.memo(({ project, onSelect }) => {
     const { name, summary, imgSrc, liveSiteLink, sourceCodeLink, techList } = project;
+
+    // Stable per-item handler — only recreated if the project or callback changes
+    const handleClick = useCallback(() => onSelect(project), [onSelect, project]);
+    const handleKeyDown = useCallback(
+        (e: React.KeyboardEvent) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onSelect(project);
+            }
+        },
+        [onSelect, project]
+    );
 
     return (
         <div
             className="project-card rounded-xl p-6 max-w-xs flex flex-col bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-700 shadow-md hover:shadow-sky-500/20 hover:ring-sky-500 hover:scale-105 transform transition-all duration-300 cursor-pointer"
-            onClick={onClick}
-            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onClick(); } }}
+            onClick={handleClick}
+            onKeyDown={handleKeyDown}
             role="button"
             tabIndex={0}
             aria-label={`View details for ${name}`}

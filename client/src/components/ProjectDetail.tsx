@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import useEscapeKey from "../hooks/useEscapeKey";
 import useFocusTrap from "../hooks/useFocusTrap";
+import useScrollLock from "../hooks/useScrollLock";
 
 export interface ProjectDetailData {
     name: string;
@@ -24,6 +25,9 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onClose }) => {
 
     // Trap focus inside the dialog while open
     const dialogRef = useFocusTrap<HTMLDivElement>();
+
+    // Prevent background page from scrolling while modal is open
+    useScrollLock();
 
     return (
         <div

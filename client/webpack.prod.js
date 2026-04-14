@@ -6,7 +6,7 @@ module.exports = merge(webpackConfig, {
     mode: "production",
     output: {
         path: path.join(__dirname, "build"),
-        filename: "bundle.js",
+        filename: "[name].[contenthash:8].js",
         clean: true
     }
 })
