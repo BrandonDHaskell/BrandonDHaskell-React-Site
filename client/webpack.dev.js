@@ -16,7 +16,9 @@ module.exports = merge(webpackConfig, {
             }
         ],
         compress: true,
+        host: "0.0.0.0",
         port: 3000,
+        allowedHosts: "all",
         open: true,
         hot: true,
         client: {
