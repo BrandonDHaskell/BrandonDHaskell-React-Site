@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 type Config struct {
@@ -11,10 +12,13 @@ type Config struct {
 	Env       string
 	StaticDir string
 
+	// Comma-separated list of allowed CORS origins.
+	// Defaults to the production domain; set CORS_ORIGINS="*" only for local dev.
+	CORSOrigins []string
+
 	// Future use — leave empty until features require them
 	DatabaseURL   string
 	SessionSecret string
-	CORSOrigins   string
 }
 
 func Load() Config {
@@ -22,9 +26,9 @@ func Load() Config {
 		Port:          envOrDefault("PORT", "4000"),
 		Env:           envOrDefault("GO_ENV", "development"),
 		StaticDir:     envOrDefault("STATIC_DIR", "./static"),
+		CORSOrigins:   parseOrigins(envOrDefault("CORS_ORIGINS", "https://brandondhaskell.com,https://www.brandondhaskell.com")),
 		DatabaseURL:   os.Getenv("DATABASE_URL"),
 		SessionSecret: os.Getenv("SESSION_SECRET"),
-		CORSOrigins:   envOrDefault("CORS_ORIGINS", "*"),
 	}
 
 	// Resolve static dir to absolute path and validate
@@ -49,4 +53,17 @@ func envOrDefault(key, fallback string) string {
 		return v
 	}
 	return fallback
+}
+
+// parseOrigins splits a comma-separated origin string into a trimmed slice.
+// Example: "https://example.com, https://www.example.com" → ["https://example.com", "https://www.example.com"]
+func parseOrigins(raw string) []string {
+	parts := strings.Split(raw, ",")
+	origins := make([]string, 0, len(parts))
+	for _, p := range parts {
+		if trimmed := strings.TrimSpace(p); trimmed != "" {
+			origins = append(origins, trimmed)
+		}
+	}
+	return origins
 }
