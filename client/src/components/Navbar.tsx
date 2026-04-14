@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { useTheme } from "./ThemeContext";
+import { GitHubIcon, LinkedInIcon } from "./Icons";
 
-interface NavbarProps {
-    onLoginClick: () => void;
-}
-
-const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
+const Navbar: React.FC = () => {
     const { dark, toggleTheme } = useTheme();
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -37,18 +34,31 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
                             {link.label}
                         </a>
                     ))}
+                    <span className="mx-1 h-5 w-px bg-gray-300 dark:bg-gray-600" aria-hidden="true" />
+                    <a
+                        href="https://github.com/BrandonDHaskell"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="GitHub profile"
+                        className="px-2 py-1.5 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                    >
+                        <GitHubIcon size={18} />
+                    </a>
+                    <a
+                        href="https://linkedin.com/in/BrandonDHaskell"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="LinkedIn profile"
+                        className="px-2 py-1.5 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                    >
+                        <LinkedInIcon size={18} />
+                    </a>
                     <button
                         onClick={toggleTheme}
                         aria-label="Toggle theme"
                         className="ml-2 px-2 py-1.5 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-lg"
                     >
                         {dark ? "☀️" : "🌙"}
-                    </button>
-                    <button
-                        onClick={onLoginClick}
-                        className="ml-2 title-font text-sm font-bold px-4 py-1.5 rounded-md border-2 border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white transition-colors"
-                    >
-                        Log In
                     </button>
                 </div>
 
@@ -84,12 +94,26 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
                             {link.label}
                         </a>
                     ))}
-                    <button
-                        onClick={() => { onLoginClick(); setMenuOpen(false); }}
-                        className="mt-2 title-font text-sm font-bold px-4 py-1.5 rounded-md border-2 border-sky-500 text-sky-500"
-                    >
-                        Log In
-                    </button>
+                    <div className="flex items-center gap-4 pt-3 mt-2 border-t border-gray-200 dark:border-gray-700">
+                        <a
+                            href="https://github.com/BrandonDHaskell"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="GitHub profile"
+                            className="text-gray-600 dark:text-gray-300 hover:text-sky-500 transition-colors"
+                        >
+                            <GitHubIcon size={20} />
+                        </a>
+                        <a
+                            href="https://linkedin.com/in/BrandonDHaskell"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="LinkedIn profile"
+                            className="text-gray-600 dark:text-gray-300 hover:text-sky-500 transition-colors"
+                        >
+                            <LinkedInIcon size={20} />
+                        </a>
+                    </div>
                 </div>
             )}
         </nav>

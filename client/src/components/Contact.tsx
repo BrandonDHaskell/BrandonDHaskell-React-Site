@@ -1,11 +1,11 @@
 import React from "react";
+import { GitHubIcon, LinkedInIcon } from "./Icons";
 
 const Contact: React.FC = () => {
     return (
         <section id="contact" className="bg-white dark:bg-gray-900 transition-colors">
             <h1
-                className="text-4xl font-bold text-center py-8 text-gray-900 dark:text-gray-100"
-                style={{ fontFamily: 'JetBrains Mono, sans-serif' }}
+                className="title-font text-4xl font-bold text-center py-8 text-gray-900 dark:text-gray-100"
             >
                 CONNECT
             </h1>
@@ -19,16 +19,18 @@ const Contact: React.FC = () => {
                     href="https://linkedin.com/in/BrandonDHaskell"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sky-600 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 title-font text-lg"
+                    className="flex items-center gap-2 text-sky-600 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 title-font text-lg transition-colors"
                 >
+                    <LinkedInIcon size={22} />
                     LinkedIn — in/BrandonDHaskell
                 </a>
                 <a
                     href="https://github.com/BrandonDHaskell"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sky-600 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 title-font text-lg"
+                    className="flex items-center gap-2 text-sky-600 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 title-font text-lg transition-colors"
                 >
+                    <GitHubIcon size={22} />
                     GitHub — BrandonDHaskell
                 </a>
             </div>
