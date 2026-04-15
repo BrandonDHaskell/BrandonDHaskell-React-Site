@@ -10,6 +10,9 @@ REMOTE_DIR="${DEPLOY_DIR:-/opt/site}"
 SERVICE_NAME="${DEPLOY_SERVICE:-site}"
 
 LOCAL_DIST="dist"
+NGINX_CONF="nginx/prod-site.conf"
+NGINX_REMOTE="/etc/nginx/sites-available/site.conf"
+NGINX_ENABLED="/etc/nginx/sites-enabled/site.conf"
 
 # ──────────────────────────────────────────────
 # Preflight checks
@@ -42,6 +45,50 @@ echo "Syncing static assets..."
 rsync -az --delete "$LOCAL_DIST/static/" "$REMOTE_USER@$REMOTE_HOST:$REMOTE_DIR/static/"
 
 # ──────────────────────────────────────────────
+# Nginx configuration
+# ──────────────────────────────────────────────
+NGINX_RELOAD=false
+
+if [ -f "$NGINX_CONF" ]; then
+    echo "Syncing Nginx config..."
+
+    # Upload to a staging path so we can validate before activating
+    scp "$NGINX_CONF" "$REMOTE_USER@$REMOTE_HOST:/tmp/nginx-site.conf.new"
+
+    # Check if the config actually changed (skip reload if identical)
+    CHANGED=$(ssh "$REMOTE_USER@$REMOTE_HOST" "
+        if [ -f $NGINX_REMOTE ] && diff -q /tmp/nginx-site.conf.new $NGINX_REMOTE > /dev/null 2>&1; then
+            echo 'no'
+        else
+            echo 'yes'
+        fi
+    ")
+
+    if [ "$CHANGED" = "yes" ]; then
+        # Validate syntax before activating
+        ssh "$REMOTE_USER@$REMOTE_HOST" "
+            sudo cp /tmp/nginx-site.conf.new $NGINX_REMOTE
+            sudo ln -sf $NGINX_REMOTE $NGINX_ENABLED
+            if sudo nginx -t 2>&1; then
+                echo 'Nginx config valid'
+            else
+                echo 'ERROR: Nginx config test failed — rolling back'
+                sudo git -C /etc/nginx checkout -- sites-available/site.conf 2>/dev/null || true
+                exit 1
+            fi
+        "
+        NGINX_RELOAD=true
+    else
+        echo "Nginx config unchanged, skipping."
+    fi
+
+    # Clean up staging file
+    ssh "$REMOTE_USER@$REMOTE_HOST" "rm -f /tmp/nginx-site.conf.new"
+else
+    echo "No Nginx config found at $NGINX_CONF, skipping."
+fi
+
+# ──────────────────────────────────────────────
 # Swap binary and restart
 # ──────────────────────────────────────────────
 echo "Swapping binary and restarting service..."
@@ -51,6 +98,12 @@ ssh "$REMOTE_USER@$REMOTE_HOST" "
     mv server.new server
     sudo systemctl restart $SERVICE_NAME
 "
+
+# Reload Nginx if its config was updated (after Go server is back up)
+if [ "$NGINX_RELOAD" = true ]; then
+    echo "Reloading Nginx..."
+    ssh "$REMOTE_USER@$REMOTE_HOST" "sudo systemctl reload nginx"
+fi
 
 # ──────────────────────────────────────────────
 # Verify

@@ -17,19 +17,24 @@ import (
 func main() {
 	cfg := config.Load()
 
+	// Rate limiter for API routes — 20 requests per minute per IP.
+	// Static assets are excluded since browsers/Cloudflare cache them.
+	apiLimiter := middleware.NewRateLimiter(20, 1*time.Minute)
+	defer apiLimiter.Stop()
+
 	mux := http.NewServeMux()
 
-	// Health & diagnostic endpoints
+	// Health & diagnostic endpoints (not rate-limited — used by monitoring)
 	mux.HandleFunc("/healthz", handlers.HealthHandler)
 
-	// Mount API under /api (future endpoints go here)
-	mux.HandleFunc("/api/hello", handlers.HelloHandler)
+	// Mount API under /api (rate-limited)
+	mux.Handle("/api/hello", apiLimiter.Limit(http.HandlerFunc(handlers.HelloHandler)))
 
 	// Serve React static build with SPA fallback
 	mux.Handle("/", handlers.SPAHandler(cfg.StaticDir))
 
-	// Apply CORS middleware to all routes
-	handler := middleware.CORS(cfg.CORSOrigins)(mux)
+	// Apply middleware: Logger → SecureHeaders → CORS → mux
+	handler := middleware.Logger(middleware.SecureHeaders(middleware.CORS(cfg.CORSOrigins)(mux)))
 
 	srv := &http.Server{
 		Addr:         ":" + cfg.Port,
