@@ -1,7 +1,7 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600&family=Oxygen+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Oxygen+Mono&display=swap');
 
 html {
     scroll-behavior: smooth;
@@ -14,4 +14,24 @@ body {
   
 .title-font {
     font-family: 'JetBrains Mono', monospace; 
+}
+
+/* Respect user motion preferences — freeze SVG animations and reduce transitions */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+
+    svg animate,
+    svg animateTransform {
+        dur: 0.01ms;
+    }
 }
