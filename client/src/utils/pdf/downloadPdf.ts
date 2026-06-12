@@ -1,4 +1,5 @@
 import { ResumeView } from '../../types/resume';
+import { applyPdfBudget } from './applyPdfBudget';
 import { buildDocDefinition } from './buildDocDefinition';
 
 /**
@@ -21,5 +22,5 @@ export const downloadResumePdf = async (view: ResumeView): Promise<void> => {
   const safeName = view.profile.name.replace(/\s+/g, '_');
   const fileName = `${safeName}_${view.roleLabel.replace(/\s+/g, '')}_Resume.pdf`;
 
-  pdfMake.createPdf(buildDocDefinition(view)).download(fileName);
+  pdfMake.createPdf(buildDocDefinition(applyPdfBudget(view))).download(fileName);
 };

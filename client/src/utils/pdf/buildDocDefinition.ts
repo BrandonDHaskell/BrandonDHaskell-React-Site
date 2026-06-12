@@ -74,7 +74,7 @@ export const buildDocDefinition = (view: ResumeView): TDocumentDefinitions => {
   const education: Content[] = view.education.map((e) => ({
     columns: [
       { text: `${e.credential} — ${e.institution}`, style: 'body' },
-      { text: e.year, style: 'entryDates', alignment: 'right' as const },
+      { text: e.year ?? '', style: 'entryDates', alignment: 'right' as const },
     ],
     margin: [0, 2, 0, 0] as [number, number, number, number],
   }));

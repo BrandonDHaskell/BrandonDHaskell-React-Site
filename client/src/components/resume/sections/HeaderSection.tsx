@@ -49,12 +49,12 @@ export const HeaderSection: React.FC<HeaderSectionProps> = React.memo(
 
     return (
       <header>
-        <h1 className="text-3xl font-semibold tracking-tight text-zinc-900 sm:text-4xl">
+        <h1 className="text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-4xl">
           {profile.name}
         </h1>
-        <p className="mt-1 text-lg text-zinc-600">{view.headline}</p>
+        <p className="mt-1 text-lg text-zinc-600 dark:text-zinc-400">{view.headline}</p>
 
-        <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm text-zinc-500">
+        <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm text-zinc-500 dark:text-zinc-400">
           {contacts.map((c) => (
             <li key={c.label} className="flex items-center gap-1.5">
               {c.icon}
@@ -62,7 +62,7 @@ export const HeaderSection: React.FC<HeaderSectionProps> = React.memo(
                 <a
                   href={c.href}
                   data-print-href={c.printHref}
-                  className="hover:text-zinc-900 hover:underline"
+                  className="hover:text-zinc-900 dark:hover:text-zinc-100 hover:underline"
                   target={c.href.startsWith('mailto:') ? undefined : '_blank'}
                   rel="noreferrer"
                 >
@@ -75,7 +75,7 @@ export const HeaderSection: React.FC<HeaderSectionProps> = React.memo(
           ))}
         </ul>
 
-        <p className="mt-6 max-w-2xl text-zinc-700">{view.summary}</p>
+        <p className="mt-6 max-w-2xl text-zinc-700 dark:text-zinc-300">{view.summary}</p>
       </header>
     );
   },

@@ -73,10 +73,11 @@ const ResumeBody: React.FC<ResumeBodyProps> = ({
             onClick={onReset}
             title="Forget my selection"
             aria-label="Forget my selection and return to role question"
-            className="rounded-lg p-2 text-zinc-400 transition-colors
+            className="rounded-lg p-2 text-zinc-400 dark:text-zinc-500 transition-colors
               hover:bg-zinc-100 hover:text-zinc-700
+              dark:hover:bg-zinc-800 dark:hover:text-zinc-200
               focus-visible:outline focus-visible:outline-2
-              focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
+              focus-visible:outline-offset-2 focus-visible:outline-zinc-900 dark:focus-visible:outline-zinc-100"
           >
             <RotateCcw className="h-4 w-4" aria-hidden="true" />
           </button>
@@ -85,11 +86,14 @@ const ResumeBody: React.FC<ResumeBodyProps> = ({
             type="button"
             onClick={handleDownload}
             disabled={isGenerating}
-            className="inline-flex items-center gap-2 rounded-lg bg-zinc-900
-              px-4 py-2 text-sm font-medium text-white transition-colors
-              hover:bg-zinc-700 disabled:opacity-60
+            className="inline-flex items-center gap-2 rounded-lg
+              bg-zinc-900 dark:bg-zinc-100
+              px-4 py-2 text-sm font-medium
+              text-white dark:text-zinc-900
+              transition-colors hover:bg-zinc-700 dark:hover:bg-zinc-300
+              disabled:opacity-60
               focus-visible:outline focus-visible:outline-2
-              focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
+              focus-visible:outline-offset-2 focus-visible:outline-zinc-900 dark:focus-visible:outline-zinc-100"
           >
             {isGenerating ? (
               <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />

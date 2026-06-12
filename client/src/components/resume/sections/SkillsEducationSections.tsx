@@ -13,10 +13,10 @@ export const SkillsSection: React.FC<SkillsSectionProps> = React.memo(
       <dl className="space-y-2 text-sm">
         {groups.map((group) => (
           <div key={group.category} className="flex flex-col sm:flex-row sm:gap-3">
-            <dt className="w-32 shrink-0 font-medium text-zinc-900">
+            <dt className="w-32 shrink-0 font-medium text-zinc-900 dark:text-zinc-100">
               {group.category}
             </dt>
-            <dd className="text-zinc-700">{group.items.join(', ')}</dd>
+            <dd className="text-zinc-700 dark:text-zinc-300">{group.items.join(', ')}</dd>
           </div>
         ))}
       </dl>
@@ -40,11 +40,11 @@ export const EducationSection: React.FC<EducationSectionProps> = React.memo(
             key={`${e.institution}-${e.credential}`}
             className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between"
           >
-            <span className="text-zinc-900">
+            <span className="text-zinc-900 dark:text-zinc-100">
               {e.credential}
-              <span className="text-zinc-500"> · {e.institution}</span>
+              <span className="text-zinc-500 dark:text-zinc-400"> · {e.institution}</span>
             </span>
-            <span className="text-zinc-500">{e.year}</span>
+            <span className="text-zinc-500 dark:text-zinc-400">{e.year}</span>
           </li>
         ))}
       </ul>

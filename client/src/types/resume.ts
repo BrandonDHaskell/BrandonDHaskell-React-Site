@@ -5,11 +5,11 @@
 
 /** The role variants a visitor can choose. Add/remove as needed. */
 export const ROLE_TAGS = [
-  'frontend',
-  'backend',
-  'fullstack',
-  'devops',
-  'cloud',
+  'business-systems-analyst',
+  'implementation-specialist',
+  'technical-program-manager',
+  'technical-support-engineer',
+  'automation-engineer',
 ] as const;
 
 export type RoleTag = (typeof ROLE_TAGS)[number];
@@ -84,7 +84,7 @@ export interface SkillGroup extends Taggable {
 export interface EducationEntry {
   institution: string;
   credential: string;
-  year: string;
+  year: string | null;
 }
 
 /** The master document — the ONLY file you edit when life happens. */

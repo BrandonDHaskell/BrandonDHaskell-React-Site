@@ -28,18 +28,18 @@ export const RoleGate: React.FC<RoleGateProps> = ({
   <main className="mx-auto flex min-h-[80vh] max-w-2xl flex-col justify-center px-4 py-16 sm:px-6">
     {/* Identity — visible before any interaction */}
     <header>
-      <h1 className="text-3xl font-semibold tracking-tight text-zinc-900 sm:text-4xl">
+      <h1 className="text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-4xl">
         {profile.name}
       </h1>
-      <p className="mt-2 text-lg text-zinc-600">{profile.headline.default}</p>
+      <p className="mt-2 text-lg text-zinc-600 dark:text-zinc-400">{profile.headline.default}</p>
     </header>
 
     {/* The question */}
     <div className="mt-12">
-      <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-zinc-500">
+      <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-zinc-500 dark:text-zinc-400">
         What are you hiring for?
       </h2>
-      <p className="mt-2 text-sm text-zinc-600">
+      <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
         Pick a focus and I&rsquo;ll bring the most relevant work forward.
         Same record underneath — only the emphasis changes.
       </p>
@@ -50,21 +50,22 @@ export const RoleGate: React.FC<RoleGateProps> = ({
             key={role.tag}
             type="button"
             onClick={() => onSelect(role.tag)}
-            className="group rounded-xl border border-zinc-200 bg-white p-4 text-left
-              transition-colors hover:border-zinc-900
+            className="group rounded-xl border border-zinc-200 dark:border-zinc-700
+              bg-white dark:bg-zinc-800 p-4 text-left
+              transition-colors hover:border-zinc-900 dark:hover:border-zinc-300
               focus-visible:outline focus-visible:outline-2
-              focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
+              focus-visible:outline-offset-2 focus-visible:outline-zinc-900 dark:focus-visible:outline-zinc-100"
           >
-            <span className="flex items-center justify-between font-medium text-zinc-900">
+            <span className="flex items-center justify-between font-medium text-zinc-900 dark:text-zinc-100">
               {role.label}
               <ArrowRight
-                className="h-4 w-4 text-zinc-300 transition-transform
-                  group-hover:translate-x-0.5 group-hover:text-zinc-900
+                className="h-4 w-4 text-zinc-300 dark:text-zinc-600 transition-transform
+                  group-hover:translate-x-0.5 group-hover:text-zinc-900 dark:group-hover:text-zinc-100
                   motion-reduce:transition-none"
                 aria-hidden="true"
               />
             </span>
-            <span className="mt-1 block text-xs text-zinc-500">
+            <span className="mt-1 block text-xs text-zinc-500 dark:text-zinc-400">
               {role.blurb}
             </span>
           </button>
@@ -75,10 +76,10 @@ export const RoleGate: React.FC<RoleGateProps> = ({
       <button
         type="button"
         onClick={() => onSelect('all')}
-        className="mt-6 text-sm text-zinc-500 underline decoration-zinc-300
-          underline-offset-4 transition-colors hover:text-zinc-900
+        className="mt-6 text-sm text-zinc-500 dark:text-zinc-400 underline decoration-zinc-300 dark:decoration-zinc-600
+          underline-offset-4 transition-colors hover:text-zinc-900 dark:hover:text-zinc-100
           focus-visible:outline focus-visible:outline-2
-          focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
+          focus-visible:outline-offset-2 focus-visible:outline-zinc-900 dark:focus-visible:outline-zinc-100"
       >
         Not sure yet — show me everything
       </button>
