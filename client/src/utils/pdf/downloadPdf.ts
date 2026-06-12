@@ -17,6 +17,7 @@ export const downloadResumePdf = async (view: ResumeView): Promise<void> => {
 
   pdfMake.addVirtualFileSystem(vfs.default);
 
+  const sanitize = (s: string): string => s.replace(/[^\w]+/g, '_').replace(/^_|_$/g, '');
   const safeName = view.profile.name.replace(/\s+/g, '_');
   const fileName = `${safeName}_${view.roleLabel.replace(/\s+/g, '')}_Resume.pdf`;
 
