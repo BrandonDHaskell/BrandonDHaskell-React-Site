@@ -21,7 +21,7 @@ const HeroCopy: React.FC<HeroCopyProps> = ({ visible }) => (
                         text-sky-500 dark:text-sky-400
                         transition-all duration-500 ease-out ${reveal(visible[0])}`}
         >
-            Systems · Backend · Embedded · Internal Tools
+            Technical Operations · System Analysis · Automation · Internal Tools
         </p>
 
         {/* Headline */}
@@ -30,7 +30,7 @@ const HeroCopy: React.FC<HeroCopyProps> = ({ visible }) => (
                         text-gray-900 dark:text-gray-100
                         transition-all duration-600 ease-out ${reveal(visible[1])}`}
         >
-            I build practical software systems for operations, backend services, and connected devices.
+            I keep complex operations reliable, and I build the tools that make them run.
         </h1>
 
         {/* Supporting paragraph */}
@@ -39,8 +39,7 @@ const HeroCopy: React.FC<HeroCopyProps> = ({ visible }) => (
                         text-gray-600 dark:text-gray-400
                         transition-all duration-700 ease-out ${reveal(visible[2])}`}
         >
-            I'm Brandon Haskell — 10+ years of systems and operations work at Amazon,
-            now building software across React, TypeScript, Go, C++, and embedded systems.
+            I'm Brandon Haskell, a technical operations and systems professional with 10+ years at Amazon. I configured the support systems behind global marketplace launches, and I build internal tools in SQL, Python, and Go that make operations more reliable.
         </p>
 
         {/* Role-focus line */}
@@ -49,7 +48,7 @@ const HeroCopy: React.FC<HeroCopyProps> = ({ visible }) => (
                         text-gray-500 dark:text-gray-500
                         transition-all duration-700 ease-out ${reveal(visible[3])}`}
         >
-            Targeting Automation Engineer, Internal Tools Developer, Junior Backend Engineer, and Technical Solutions Engineer roles.
+            Targeting technical operations, systems analyst, business systems analyst, implementation, and technical program roles.
         </p>
 
         {/* CTAs */}
