@@ -22,7 +22,7 @@ module.exports = merge(webpackConfig, {
         open: true,
         hot: true,
         client: {
-            webSocketURL: "ws://localhost:8080/ws"
+            webSocketURL: "ws://localhost:3000/ws"
         }
     }
 });
