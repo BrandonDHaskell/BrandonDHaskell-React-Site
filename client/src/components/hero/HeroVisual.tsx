@@ -1,85 +1,137 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-interface Node {
+type Anchor = "start" | "middle" | "end";
+
+interface Stage {
   id: string;
-  cx: number;
-  cy: number;
   label: string;
-  size: "lg" | "md" | "sm";
+  angle: number;
+  anchor: Anchor;
 }
 
 interface Edge {
-  from: string;
-  to: string;
-  pulse: boolean;
+  id: string;
+  verb: string;
+  fromAngle: number;
+  description: string;
 }
 
-const NODES: Node[] = [
-  // Operations lane
-  { id: "ops", cx: 80, cy: 62, label: "ops", size: "md" },
-  { id: "automation", cx: 200, cy: 42, label: "automation", size: "lg" },
-  { id: "infra", cx: 322, cy: 66, label: "infra", size: "md" },
+const CENTER = 260;
+const R = 140;
+const LABEL_RADIUS = R + 38;
+const VERB_RADIUS = R - 40;
+const MONO = "'JetBrains Mono', monospace";
 
-  // Software lane
-  { id: "client", cx: 56, cy: 178, label: "client", size: "sm" },
-  { id: "api", cx: 155, cy: 165, label: "api", size: "sm" },
-  { id: "backend", cx: 240, cy: 200, label: "backend", size: "lg" },
-  { id: "data", cx: 338, cy: 170, label: "data", size: "md" },
-
-  // Devices lane
-  { id: "sensor", cx: 68, cy: 294, label: "sensor", size: "sm" },
-  { id: "controller", cx: 195, cy: 300, label: "controller", size: "lg" },
-  { id: "actuator", cx: 340, cy: 286, label: "actuator", size: "md" },
-];
-
-const EDGES: Edge[] = [
-  // Operations Lane: The CI/CD & IaC Pipeline
-  { from: "ops", to: "automation", pulse: true },
-  { from: "automation", to: "infra", pulse: true },
-
-  // Software Lane: The Standard Request Flow
-  { from: "client", to: "api", pulse: false },
-  { from: "api", to: "backend", pulse: true },
-  { from: "backend", to: "data", pulse: true },
-
-  // Devices Lane: Local Control Loop (Edge)
-  { from: "sensor", to: "controller", pulse: true },
-  { from: "controller", to: "actuator", pulse: true },
-
-  // The "Bridges": Connecting the Layers
-  { from: "automation", to: "backend", pulse: true },
-  { from: "automation", to: "data", pulse: true },
-  { from: "infra", to: "api", pulse: false },
-  { from: "infra", to: "backend", pulse: false },
-  { from: "infra", to: "data", pulse: false },
-  { from: "controller", to: "api", pulse: true },
-  ];
-
-const nodeMap = new Map(NODES.map((node) => [node.id, node]));
-
-const sizeRadius = (size: Node["size"]): number => {
-  switch (size) {
-    case "lg":
-      return 8;
-    case "md":
-      return 5.5;
-    case "sm":
-      return 4;
-    default:
-      return 5.5;
-  }
+// Convert a clockwise angle (0 = top / 12 o'clock) to an x/y point.
+const polar = (deg: number, radius: number) => {
+  const rad = (deg * Math.PI) / 180;
+  return {
+    x: CENTER + radius * Math.sin(rad),
+    y: CENTER - radius * Math.cos(rad),
+  };
 };
 
+// Five stages, evenly spaced around the ring, Operations at the top, clockwise.
+const STAGES: Stage[] = [
+  { id: "operations", label: "Operations", angle: 0, anchor: "middle" },
+  { id: "automation", label: "Automation", angle: 72, anchor: "start" },
+  { id: "systems", label: "Systems", angle: 144, anchor: "start" },
+  { id: "monitoring", label: "Monitoring", angle: 216, anchor: "end" },
+  { id: "reporting", label: "Reporting", angle: 288, anchor: "end" },
+];
+
+// Each transition is the arc leaving its stage, labeled with the action it performs.
+const EDGES: Edge[] = [
+  {
+    id: "codify",
+    verb: "Codify",
+    fromAngle: 0,
+    description:
+      "Runbooks, toil, and provisioning are codified into software, so the same step runs the same way every time and human error drops out.",
+  },
+  {
+    id: "deploy",
+    verb: "Deploy",
+    fromAngle: 72,
+    description:
+      "Infrastructure, configuration, and releases are executed automatically into a resilient system.",
+  },
+  {
+    id: "observe",
+    verb: "Observe",
+    fromAngle: 144,
+    description:
+      "The running system emits telemetry (logs, metrics, and traces) that makes its health visible.",
+  },
+  {
+    id: "measure",
+    verb: "Measure",
+    fromAngle: 216,
+    description:
+      "Telemetry is aggregated into dashboards and alerts that test performance against SLOs.",
+  },
+  {
+    id: "self-heal",
+    verb: "Self-heal",
+    fromAngle: 288,
+    description:
+      "A breached threshold triggers automated remediation or feeds the next sprint to harden the system, which closes the loop.",
+  },
+];
+
+// Full circle, used as the faint continuous ring and as the pulse motion path.
+const ringTop = polar(0, R);
+const ringBottom = polar(180, R);
+const RING_PATH = `M ${ringTop.x} ${ringTop.y} A ${R} ${R} 0 1 1 ${ringBottom.x} ${ringBottom.y} A ${R} ${R} 0 1 1 ${ringTop.x} ${ringTop.y}`;
+
+// One visible connector arc, inset from both stages, between consecutive dots.
+const arcPath = (fromAngle: number) => {
+  const start = polar(fromAngle + 9, R);
+  const end = polar(fromAngle + 59, R);
+  return `M ${start.x} ${start.y} A ${R} ${R} 0 0 1 ${end.x} ${end.y}`;
+};
+
+// Arrowhead drawn explicitly (no markers) so it renders in every browser.
+// Sits on the ring at the arc midpoint, rotated to point clockwise along the tangent.
+const ARROW_HEAD = "M6.5 0 L-4.5 -4.5 L-4.5 4.5 Z";
+
+const usePrefersReducedMotion = (): boolean => {
+  const [reduced, setReduced] = useState<boolean>(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const onChange = () => setReduced(mq.matches);
+    onChange();
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  return reduced;
+};
+
+const PULSE_DURATION = 7;
+const PULSE_COUNT = 3;
+
 const HeroVisual: React.FC = () => {
+  const reducedMotion = usePrefersReducedMotion();
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const active = EDGES.find((edge) => edge.id === activeId) ?? null;
+
   return (
     <div
       className="
-        relative w-full min-h-[300px] lg:min-h-[420px] rounded-2xl lg:rounded-3xl overflow-hidden
+        relative flex flex-col w-full min-h-[400px] lg:min-h-[460px]
+        rounded-2xl lg:rounded-3xl overflow-hidden
         [--hero-bg:theme(colors.white)]
         [--hero-border:theme(colors.slate.200)]
         [--hero-grid:theme(colors.slate.400)]
-        [--hero-lane-label:theme(colors.slate.500)]
-        [--hero-node-label:theme(colors.slate.600)]
+        [--hero-label:theme(colors.slate.600)]
+        [--hero-verb:theme(colors.slate.500)]
+        [--hero-verb-active:theme(colors.sky.600)]
         [--hero-node-core:theme(colors.white)]
         [--hero-node-stroke:theme(colors.sky.600)]
         [--hero-node-dot:theme(colors.sky.500)]
@@ -87,11 +139,15 @@ const HeroVisual: React.FC = () => {
         [--hero-pulse:theme(colors.sky.500)]
         [--hero-glow:rgba(14,165,233,0.10)]
         [--hero-shadow:rgba(14,165,233,0.08)]
+        [--hero-readout-bg:theme(colors.slate.50)]
+        [--hero-readout-border:theme(colors.slate.200)]
+        [--hero-readout-text:theme(colors.slate.600)]
         dark:[--hero-bg:theme(colors.slate.950)]
         dark:[--hero-border:theme(colors.slate.800)]
         dark:[--hero-grid:theme(colors.slate.500)]
-        dark:[--hero-lane-label:theme(colors.slate.500)]
-        dark:[--hero-node-label:theme(colors.slate.400)]
+        dark:[--hero-label:theme(colors.slate.300)]
+        dark:[--hero-verb:theme(colors.slate.500)]
+        dark:[--hero-verb-active:theme(colors.sky.300)]
         dark:[--hero-node-core:theme(colors.slate.900)]
         dark:[--hero-node-stroke:theme(colors.sky.400)]
         dark:[--hero-node-dot:theme(colors.sky.300)]
@@ -99,24 +155,28 @@ const HeroVisual: React.FC = () => {
         dark:[--hero-pulse:theme(colors.sky.300)]
         dark:[--hero-glow:rgba(14,165,233,0.08)]
         dark:[--hero-shadow:rgba(14,165,233,0.10)]
+        dark:[--hero-readout-bg:theme(colors.slate.900)]
+        dark:[--hero-readout-border:theme(colors.slate.800)]
+        dark:[--hero-readout-text:theme(colors.slate.400)]
       "
       style={{
         backgroundColor: "var(--hero-bg)",
         border: "1px solid var(--hero-border)",
         boxShadow: "0 24px 64px -24px var(--hero-shadow)",
       }}
-      aria-hidden="true"
     >
+      {/* Ambient glow */}
       <div
         className="absolute inset-0 rounded-[inherit] pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at center, var(--hero-glow) 0%, transparent 70%)",
+            "radial-gradient(circle at center, var(--hero-glow) 0%, transparent 68%)",
         }}
       />
 
+      {/* Background grid */}
       <svg
-        className="absolute inset-0 h-full w-full opacity-[0.06]"
+        className="absolute inset-0 h-full w-full opacity-[0.06] pointer-events-none"
         aria-hidden="true"
       >
         <defs>
@@ -137,167 +197,179 @@ const HeroVisual: React.FC = () => {
         <rect width="100%" height="100%" fill="url(#hero-grid)" />
       </svg>
 
+      {/* Reliability cycle */}
       <svg
-        viewBox="0 0 400 360"
-        className="relative h-full w-full p-6"
+        viewBox="0 0 520 520"
+        preserveAspectRatio="xMidYMid meet"
+        className="relative w-full flex-1 min-h-0 p-5"
+        role="img"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {[
-          { y: 22, text: "OPERATIONS" },
-          { y: 140, text: "SOFTWARE" },
-          { y: 260, text: "DEVICES" },
-        ].map(({ y, text }) => (
-          <text
-            key={text}
-            x="6"
-            y={y}
-            fill="var(--hero-lane-label)"
-            fontFamily="'JetBrains Mono', monospace"
-            fontSize="9"
-            letterSpacing="0.15em"
-          >
-            {text}
-          </text>
-        ))}
+        <title>Operations reliability cycle</title>
+        <desc>
+          A continuous reliability cycle of five stages arranged in a ring:
+          operations, automation, systems, monitoring, and reporting. Arrows run
+          clockwise between the stages. Operations codifies toil into automation,
+          automation deploys to systems, systems emit telemetry observed by
+          monitoring, monitoring measures against service level objectives to
+          produce reporting, and reporting feeds back to operations to self-heal
+          and harden, continuously.
+        </desc>
 
-        {/* Edge lines: visually consistent for every edge */}
-        {EDGES.map((edge, index) => {
-          const from = nodeMap.get(edge.from);
-          const to = nodeMap.get(edge.to);
+        <defs>
+          <path id="hero-ring-path" d={RING_PATH} />
+        </defs>
 
-          if (!from || !to) {
-            return null;
-          }
+        {/* Faint continuous ring (keeps the cycle unbroken behind the stages) */}
+        <use
+          href="#hero-ring-path"
+          fill="none"
+          stroke="var(--hero-edge)"
+          strokeOpacity="0.18"
+          strokeWidth="1.4"
+        />
 
+        {/* Connector arcs, clockwise arrowheads, and verbs (each group is a hover target) */}
+        {EDGES.map((edge) => {
+          const isActive = edge.id === activeId;
+          const d = arcPath(edge.fromAngle);
+          const headPos = polar(edge.fromAngle + 34, R);
+          const verbPos = polar(edge.fromAngle + 36, VERB_RADIUS);
           return (
-            <line
-              key={`${edge.from}-${edge.to}`}
-              x1={from.cx}
-              y1={from.cy}
-              x2={to.cx}
-              y2={to.cy}
-              stroke="var(--hero-edge)"
-              strokeOpacity="0.22"
-              strokeWidth="1"
+            <g
+              key={edge.id}
+              onMouseEnter={() => setActiveId(edge.id)}
+              onMouseLeave={() => setActiveId(null)}
             >
-              <animate
-                attributeName="opacity"
-                values="0.15;0.50;0.15"
-                dur={`${3 + (index % 4) * 0.7}s`}
-                begin={`${(index * 0.4) % 3}s`}
-                repeatCount="indefinite"
+              <path
+                d={d}
+                fill="none"
+                style={{
+                  stroke: "var(--hero-edge)",
+                  strokeWidth: isActive ? 2.4 : 1.6,
+                  strokeOpacity: isActive ? 1 : 0.85,
+                  transition:
+                    "stroke-width 150ms ease, stroke-opacity 150ms ease",
+                }}
               />
-            </line>
-          );
-        })}
-
-        {/* Traveling pulses only for selected edges */}
-        {EDGES.filter((edge) => edge.pulse).map((edge, index) => {
-          const from = nodeMap.get(edge.from);
-          const to = nodeMap.get(edge.to);
-
-          if (!from || !to) {
-            return null;
-          }
-
-          const durationSeconds = 4.5 + index * 0.55;
-
-          return (
-            <circle
-              key={`pulse-${edge.from}-${edge.to}`}
-              r="2"
-              fill="var(--hero-pulse)"
-              fillOpacity="0.6"
-            >
-              <animate
-                attributeName="cx"
-                values={`${from.cx};${to.cx};${from.cx}`}
-                dur={`${durationSeconds}s`}
-                repeatCount="indefinite"
+              <path d={d} fill="none" stroke="transparent" strokeWidth="24" />
+              <path
+                d={ARROW_HEAD}
+                transform={`translate(${headPos.x} ${headPos.y}) rotate(${
+                  edge.fromAngle + 34
+                })`}
+                style={{
+                  fill: isActive
+                    ? "var(--hero-verb-active)"
+                    : "var(--hero-edge)",
+                  transition: "fill 150ms ease",
+                }}
               />
-              <animate
-                attributeName="cy"
-                values={`${from.cy};${to.cy};${from.cy}`}
-                dur={`${durationSeconds}s`}
-                repeatCount="indefinite"
-              />
-              <animate
-                attributeName="opacity"
-                values="0;0.8;0"
-                dur={`${durationSeconds}s`}
-                repeatCount="indefinite"
-              />
-            </circle>
-          );
-        })}
-
-        {/* Nodes */}
-        {NODES.map((node) => {
-          const radius = sizeRadius(node.size);
-
-          return (
-            <g key={node.id}>
-              <circle
-                cx={node.cx}
-                cy={node.cy}
-                r={radius + 4}
-                fill="var(--hero-edge)"
-                fillOpacity="0.08"
+              <text
+                x={verbPos.x}
+                y={verbPos.y}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                fontFamily={MONO}
+                fontSize="13"
+                style={{
+                  fill: isActive
+                    ? "var(--hero-verb-active)"
+                    : "var(--hero-verb)",
+                  transition: "fill 150ms ease",
+                }}
               >
-                <animate
-                  attributeName="r"
-                  values={`${radius + 3};${radius + 6};${radius + 3}`}
-                  dur="4s"
-                  repeatCount="indefinite"
-                />
-              </circle>
+                {edge.verb}
+              </text>
+            </g>
+          );
+        })}
 
+        {/* Pulses circling the ring continuously, through the arrowheads (off under reduced motion) */}
+        {!reducedMotion &&
+          Array.from({ length: PULSE_COUNT }).map((_, index) => (
+            <circle key={`pulse-${index}`} r="3" fill="var(--hero-pulse)">
+              <animateMotion
+                dur={`${PULSE_DURATION}s`}
+                begin={`${(index * PULSE_DURATION) / PULSE_COUNT}s`}
+                repeatCount="indefinite"
+              >
+                <mpath href="#hero-ring-path" />
+              </animateMotion>
+            </circle>
+          ))}
+
+        {/* Stage nodes */}
+        {STAGES.map((stage) => {
+          const pos = polar(stage.angle, R);
+          const labelPos = polar(stage.angle, LABEL_RADIUS);
+          return (
+            <g key={stage.id}>
               <circle
-                cx={node.cx}
-                cy={node.cy}
-                r={radius}
+                cx={pos.x}
+                cy={pos.y}
+                r="20"
+                fill="var(--hero-edge)"
+                fillOpacity="0.10"
+              />
+              <circle
+                cx={pos.x}
+                cy={pos.y}
+                r="13"
                 fill="var(--hero-node-core)"
                 stroke="var(--hero-node-stroke)"
-                strokeOpacity="0.6"
-                strokeWidth="1.5"
+                strokeWidth="1.6"
               />
-
-              <circle
-                cx={node.cx}
-                cy={node.cy}
-                r={radius * 0.35}
-                fill="var(--hero-node-dot)"
-              >
-                <animate
-                  attributeName="opacity"
-                  values="0.5;1;0.5"
-                  dur="3s"
-                  repeatCount="indefinite"
-                />
-              </circle>
-
+              <circle cx={pos.x} cy={pos.y} r="4.5" fill="var(--hero-node-dot)" />
               <text
-                x={node.cx}
-                y={node.cy + radius + 12}
-                textAnchor="middle"
-                fill="var(--hero-node-label)"
-                fontFamily="'JetBrains Mono', monospace"
-                fontSize="8"
+                x={labelPos.x}
+                y={labelPos.y}
+                textAnchor={stage.anchor}
+                dominantBaseline="middle"
+                fontFamily={MONO}
+                fontSize="14"
+                fill="var(--hero-label)"
               >
-                {node.label}
+                {stage.label}
               </text>
             </g>
           );
         })}
       </svg>
 
-      <style>{`
-        @media (prefers-reduced-motion: reduce) {
-          animate {
-            display: none;
-          }
-        }
-      `}</style>
+      {/* Hover readout: cycle name by default, the transition detail on hover */}
+      <div className="relative w-full px-5 pb-5">
+        <div
+          className="rounded-xl px-4 py-3 min-h-[3.25rem] flex items-center text-sm leading-relaxed"
+          style={{
+            backgroundColor: "var(--hero-readout-bg)",
+            border: "1px solid var(--hero-readout-border)",
+            color: "var(--hero-readout-text)",
+          }}
+        >
+          {active ? (
+            <span>
+              <span
+                style={{
+                  fontFamily: MONO,
+                  fontWeight: 500,
+                  color: "var(--hero-verb-active)",
+                }}
+              >
+                {active.verb}
+              </span>
+              {"  "}
+              {active.description}
+            </span>
+          ) : (
+            <span
+              style={{ fontFamily: MONO, letterSpacing: "0.04em", opacity: 0.85 }}
+            >
+              Operations reliability cycle
+            </span>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

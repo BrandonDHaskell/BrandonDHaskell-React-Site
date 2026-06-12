@@ -3,7 +3,7 @@ import React from "react";
 const CHIPS = [
     "10+ years technical operations",
     "Amazon systems background",
-    "Go • React • TypeScript • C++",
+    "SQL • Python • Go",
     "San Francisco Bay Area",
 ] as const;
 
