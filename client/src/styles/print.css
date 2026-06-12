@@ -1,0 +1,55 @@
+/*
+ * Print stylesheet for the resume page.
+ *
+ * Import once globally (e.g. in your root index.tsx or main CSS entry):
+ *   import './styles/print.css';
+ *
+ * Tailwind's `print:` variants handle visibility (controls are hidden
+ * via print:hidden in the components); this file covers what utility
+ * classes can't: @page setup and fragmentation control.
+ *
+ * Note: the pdfmake download remains the canonical PDF (ATS-safe,
+ * deterministic layout). This exists so Ctrl+P / "Save as PDF" — which
+ * some recruiters will reach for out of habit — also produces something
+ * presentable instead of printing the buttons and pills.
+ */
+
+@page {
+  size: letter;
+  margin: 0.6in 0.7in;
+}
+
+@media print {
+  /* Let the browser print true black text; strip backgrounds. */
+  body {
+    background: #ffffff !important;
+    color: #000000;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Never split an experience entry or project across a page break. */
+  article {
+    break-inside: avoid;
+  }
+
+  /* Keep section headings attached to their first item. */
+  h2 {
+    break-after: avoid;
+  }
+
+  /* Links read as plain text on paper. */
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+
+  /* Print the website URL after its link text in the contact row,
+     since "yourdomain.dev" is the one link worth having on paper.
+     Mail links already display the address itself. */
+  a[data-print-href]::after {
+    content: ' (' attr(data-print-href) ')';
+    font-size: 0.8em;
+    color: #555555;
+  }
+}

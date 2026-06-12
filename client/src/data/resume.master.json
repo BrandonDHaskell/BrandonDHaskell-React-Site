@@ -1,0 +1,111 @@
+{
+  "roles": [
+    { "tag": "fullstack", "label": "Full-Stack Engineer", "blurb": "End-to-end product delivery" },
+    { "tag": "backend", "label": "Backend Engineer", "blurb": "Go, APIs, data layers" },
+    { "tag": "cloud", "label": "Cloud / Platform", "blurb": "AWS, deployment, infrastructure" }
+  ],
+  "profile": {
+    "name": "Your Name",
+    "headline": {
+      "default": "Software Engineer",
+      "frontend": "Frontend Engineer — React & TypeScript",
+      "backend": "Backend Engineer — Go & Distributed Systems",
+      "fullstack": "Full-Stack Engineer — React / Go / AWS",
+      "devops": "DevOps Engineer — CI/CD & Infrastructure Automation",
+      "cloud": "Cloud Engineer — AWS Solutions"
+    },
+    "email": "you@yourdomain.dev",
+    "location": "San Francisco, CA",
+    "website": "https://yourdomain.dev",
+    "github": "https://github.com/yourhandle",
+    "linkedin": "https://linkedin.com/in/yourhandle",
+    "summary": {
+      "default": "Engineer with N years of experience shipping secure, performant web applications.",
+      "frontend": "Frontend-focused engineer specializing in React 18, strict TypeScript, and accessible, premium UI built with Tailwind CSS.",
+      "backend": "Backend engineer building secure, well-typed Go services with a focus on maintainable architecture and API design.",
+      "fullstack": "Full-stack engineer delivering end-to-end features across React/TypeScript frontends and Go backends on AWS.",
+      "devops": "Engineer with deep experience in deployment pipelines, Nginx, and hardening production Linux environments.",
+      "cloud": "Engineer designing cost-efficient AWS architectures with Cloudflare edge caching and security best practices."
+    }
+  },
+  "experience": [
+    {
+      "company": "Example Corp",
+      "title": "Software Engineer",
+      "location": "Remote",
+      "start": "2023-01",
+      "end": null,
+      "tags": [],
+      "bullets": [
+        {
+          "text": "Built a React 18 + TypeScript dashboard used by 5k MAU, with code-split routes cutting initial bundle 40%.",
+          "tags": ["frontend", "fullstack"],
+          "weight": { "frontend": 10, "fullstack": 6 }
+        },
+        {
+          "text": "Designed and shipped a Go REST API (JWT auth, strict typing) handling 200 req/s p99 < 80ms.",
+          "tags": ["backend", "fullstack"],
+          "weight": { "backend": 10, "fullstack": 7 }
+        },
+        {
+          "text": "Migrated deployment to EC2 + Nginx + Cloudflare, automating SSL renewal and reducing infra cost 30%.",
+          "tags": ["devops", "cloud"],
+          "weight": { "devops": 10, "cloud": 9 }
+        },
+        {
+          "text": "Mentored two junior developers through code review and pairing.",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "company": "Previous Co",
+      "title": "Junior Developer",
+      "location": "San Francisco, CA",
+      "start": "2021-06",
+      "end": "2022-12",
+      "tags": [],
+      "bullets": [
+        {
+          "text": "Implemented responsive marketing pages with Tailwind CSS, improving Lighthouse scores to 95+.",
+          "tags": ["frontend"]
+        },
+        {
+          "text": "Wrote internal CLI tooling in Go for batch data processing.",
+          "tags": ["backend", "devops"]
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "This Resume Site",
+      "url": "https://yourdomain.dev/resume",
+      "description": "JSON-driven, role-targeted resume renderer with client-side PDF generation (pdfmake).",
+      "stack": ["React 18", "TypeScript", "Tailwind", "pdfmake"],
+      "tags": [],
+      "highlights": [
+        { "text": "Single master dataset filtered per-role via tagged content model.", "tags": [] },
+        { "text": "Zero-backend architecture: static assets served via Nginx + Cloudflare CDN.", "tags": ["devops", "cloud"] }
+      ]
+    },
+    {
+      "name": "Sample DevOps Project",
+      "description": "Placeholder — replace with a real project.",
+      "stack": ["Terraform", "GitHub Actions"],
+      "tags": ["devops", "cloud"],
+      "highlights": [
+        { "text": "Placeholder highlight bullet.", "tags": [] }
+      ]
+    }
+  ],
+  "skills": [
+    { "category": "Languages", "items": ["TypeScript", "Go", "SQL", "Bash"], "tags": [] },
+    { "category": "Frontend", "items": ["React 18", "Tailwind CSS", "Webpack", "Vitest"], "tags": ["frontend", "fullstack"] },
+    { "category": "Backend", "items": ["Gin", "REST", "JWT", "PostgreSQL"], "tags": ["backend", "fullstack"] },
+    { "category": "Cloud & Infra", "items": ["AWS EC2", "Nginx", "Cloudflare", "GitHub Actions", "Docker"], "tags": ["devops", "cloud", "fullstack"] }
+  ],
+  "education": [
+    { "institution": "Your University", "credential": "B.S. Computer Science", "year": "2021" }
+  ]
+}

@@ -4,8 +4,17 @@ import Navbar from "./Navbar";
 import Profile from "./Profile";
 import Projects from "./Projects";
 import Contact from "./Contact";
+import { ResumePage } from "./resume/ResumePage";
+
+const isResumePath = (): boolean =>
+    window.location.pathname.endsWith('/resume') ||
+    window.location.pathname.endsWith('/resume/');
 
 const App: React.FC = () => {
+    if (isResumePath()) {
+        return <ResumePage />;
+    }
+
     return (
         <ThemeProvider>
             <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors">

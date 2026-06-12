@@ -10,6 +10,7 @@ const Navbar: React.FC = () => {
         { label: "Profile", href: "#profile" },
         { label: "Projects", href: "#projects" },
         { label: "Connect", href: "#contact" },
+        { label: "Resume", href: "resume" },
     ];
 
     return (

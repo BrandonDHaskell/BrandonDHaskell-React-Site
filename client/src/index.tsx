@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./components/App";
 import "./index.css";
+import "./styles/print.css";
 
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("No root element found!");
