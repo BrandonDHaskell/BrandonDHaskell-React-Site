@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useTheme } from "./ThemeContext";
 import { GitHubIcon, LinkedInIcon } from "./Icons";
+import { hasRole } from "../hooks/useRoleSelection";
 
 const Navbar: React.FC = () => {
     const { dark, toggleTheme } = useTheme();
@@ -13,7 +14,7 @@ const Navbar: React.FC = () => {
         { label: "Profile", href: "/#profile" },
         { label: "Projects", href: "/#projects" },
         { label: "Connect", href: "/#contact" },
-        { label: "Resume", href: "/resume" },
+        ...(hasRole() ? [{ label: "Resume", href: "/resume" }] : []),
     ];
 
     return (

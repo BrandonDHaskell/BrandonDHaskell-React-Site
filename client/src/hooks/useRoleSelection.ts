@@ -9,7 +9,7 @@ const isRoleSelection = (value: string | null): value is RoleSelection =>
   (value === 'all' || (ROLE_TAGS as readonly string[]).includes(value));
 
 /** URL param wins over storage so deep links always behave predictably. */
-const resolveInitialSelection = (): RoleSelection | null => {
+export const resolveInitialSelection = (): RoleSelection | null => {
   const fromUrl = new URLSearchParams(window.location.search).get(PARAM_KEY);
   if (isRoleSelection(fromUrl)) return fromUrl;
 
@@ -22,6 +22,9 @@ const resolveInitialSelection = (): RoleSelection | null => {
 
   return null; // null = no selection yet -> show the RoleGate
 };
+
+/** Returns true if a valid role exists in the URL param or localStorage. */
+export const hasRole = (): boolean => resolveInitialSelection() !== null;
 
 const persist = (selection: RoleSelection): void => {
   try {
