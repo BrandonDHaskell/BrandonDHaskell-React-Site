@@ -1,0 +1,501 @@
+{
+  "roles": [
+    {
+      "tag": "business-systems-analyst",
+      "label": "Business Systems Analyst",
+      "blurb": "Requirements, UAT, and data analysis at Amazon scale."
+    },
+    {
+      "tag": "implementation-specialist",
+      "label": "Implementation Specialist",
+      "blurb": "Global system launches, configuration, and team onboarding."
+    },
+    {
+      "tag": "technical-program-manager",
+      "label": "Technical Program Manager",
+      "blurb": "Cross-functional delivery, including a HIPAA telehealth launch."
+    },
+    {
+      "tag": "technical-support-engineer",
+      "label": "Technical Support Engineer",
+      "blurb": "Escalation support backed by sysadmin, SQL, and Python depth."
+    },
+    {
+      "tag": "automation-engineer",
+      "label": "Automation Engineer",
+      "blurb": "Scripts, pipelines, and tooling that remove manual work."
+    }
+  ],
+  "profile": {
+    "name": "Brandon Haskell",
+    "headline": {
+      "default": "Technical Operations and Systems Professional | 10+ Years at Amazon",
+      "business-systems-analyst": "Business Systems Analyst | 10+ Years at Amazon | SQL, Python, UAT",
+      "implementation-specialist": "Implementation Specialist | Global System Launches and UAT | 10+ Years at Amazon",
+      "technical-program-manager": "Technical Program Manager | HIPAA Telehealth Launch | 10+ Years at Amazon",
+      "technical-support-engineer": "Technical Support Engineer | Systems Administration and Escalation Support | SQL, Python, Linux",
+      "automation-engineer": "Automation Engineer | Python, SQL, and Internal Tooling | 10+ Years at Amazon"
+    },
+    "email": "BrandonDHaskell@outlook.com",
+    "location": "San Francisco Bay Area",
+    "website": "https://BrandonDHaskell.com",
+    "github": "https://github.com/BrandonDHaskell",
+    "linkedin": "https://linkedin.com/in/BrandonDHaskell",
+    "summary": {
+      "default": "Technical operations and systems professional with 10+ years at Amazon spanning seller support, workforce analytics, data analysis, systems administration, and technical program management. I configure, validate, and support the systems behind global launches, and I build the SQL and Python tooling that makes operations more reliable. US Air Force veteran with a background maintaining aircraft ejection systems, where reliability was not optional.",
+      "business-systems-analyst": "Business systems analyst with 10+ years at Amazon translating business requirements into system configurations, data pipelines, and process improvements. Owned UAT and launch readiness for marketplace launches across four continents, and designed a data-driven scheduling system that raised staffing efficiency from 67% to 89%. Proficient in SQL and Python, which lets me move from requirements to working analysis without waiting on engineering. US Air Force veteran.",
+      "implementation-specialist": "Implementation specialist with 10+ years at Amazon configuring, testing, and launching support systems for new countries and call centers across four continents. Owned end-to-end UAT, onboarded teams onto third-party platforms, and served as the technical liaison between engineering, product, and operations. Comfortable being the person who turns a requirement into a working production system. US Air Force veteran.",
+      "technical-program-manager": "Technical program manager with 10+ years at Amazon, most recently leading product security workstreams for Amazon's HIPAA-regulated telehealth launch across engineering, operations, legal, and compliance teams. A decade of prior hands-on roles in systems administration, data analysis, and support operations means I understand the systems I coordinate, not just the schedules. US Air Force veteran.",
+      "technical-support-engineer": "Technical support engineer with 10+ years at Amazon across systems administration, escalation support, and data analysis. Architected and supported the routing systems behind global support operations, led a team resolving complex technical issues for top-grossing sellers, and bring SQL, Python, and Linux depth that turns ticket patterns into root-cause fixes. US Air Force veteran.",
+      "automation-engineer": "Automation-focused technical professional with 10+ years at Amazon building the scripts, pipelines, and internal tools that remove manual operational work. Automated configuration workflows for global system deployments, built SQL and Python reporting pipelines, and ship production-ready tooling using modern AI-assisted development workflows. An operations background means I automate the right things, not just the easy things. US Air Force veteran."
+    }
+  },
+  "experience": [
+    {
+      "company": "Starbucks",
+      "title": "Assistant Store Manager",
+      "location": "San Francisco Bay Area",
+      "start": "2023-07",
+      "end": null,
+      "tags": [],
+      "bullets": [
+        {
+          "text": "Lead daily operations for a high-volume retail location: staffing, scheduling, inventory management, and the training and development of a team of partners.",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "company": "Career Break",
+      "title": "Family Caregiver",
+      "location": "San Francisco Bay Area",
+      "start": "2021-05",
+      "end": "2023-07",
+      "tags": [],
+      "bullets": [
+        {
+          "text": "Stepped away from industry to provide full-time care for a family member; maintained and expanded technical skills through hands-on software projects during this period (see Projects).",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "company": "Amazon",
+      "title": "Technical Program Manager",
+      "location": "Seattle, WA",
+      "start": "2020-07",
+      "end": "2021-05",
+      "tags": [],
+      "bullets": [
+        {
+          "text": "Led product security engineering workstreams for Amazon's telehealth service, defining technical requirements for authentication, encryption, and access control across engineering, operations, legal, and compliance teams.",
+          "tags": [
+            "technical-program-manager",
+            "business-systems-analyst",
+            "implementation-specialist"
+          ],
+          "weight": {
+            "technical-program-manager": 10,
+            "business-systems-analyst": 7,
+            "implementation-specialist": 5
+          }
+        },
+        {
+          "text": "Drove integration of security protocols with third-party service APIs for medical staffing and records systems, ensuring HIPAA-compliant data exchange patterns and end-to-end data security.",
+          "tags": [
+            "technical-program-manager",
+            "implementation-specialist",
+            "technical-support-engineer",
+            "automation-engineer"
+          ],
+          "weight": {
+            "technical-program-manager": 9,
+            "implementation-specialist": 8,
+            "technical-support-engineer": 5,
+            "automation-engineer": 4
+          }
+        },
+        {
+          "text": "Evaluated engineering tradeoffs and reviewed technical designs to accelerate delivery while maintaining compliance with healthcare data regulations.",
+          "tags": [
+            "technical-program-manager",
+            "business-systems-analyst"
+          ],
+          "weight": {
+            "technical-program-manager": 8,
+            "business-systems-analyst": 5
+          }
+        }
+      ]
+    },
+    {
+      "company": "Amazon",
+      "title": "System Administrator",
+      "location": "Seattle, WA",
+      "start": "2016-07",
+      "end": "2020-07",
+      "tags": [],
+      "bullets": [
+        {
+          "text": "Architected and deployed scalable support routing systems during Amazon Global Selling expansion, configuring infrastructure for new countries and call centers across four continents.",
+          "tags": [
+            "implementation-specialist",
+            "technical-support-engineer",
+            "business-systems-analyst",
+            "technical-program-manager"
+          ],
+          "weight": {
+            "implementation-specialist": 10,
+            "technical-support-engineer": 9,
+            "business-systems-analyst": 7,
+            "technical-program-manager": 6
+          }
+        },
+        {
+          "text": "Developed scripts and automated configuration workflows to streamline system deployment for new marketplace launches, reducing manual setup time and configuration errors.",
+          "tags": [
+            "automation-engineer",
+            "implementation-specialist",
+            "technical-support-engineer"
+          ],
+          "weight": {
+            "automation-engineer": 10,
+            "implementation-specialist": 7,
+            "technical-support-engineer": 6
+          }
+        },
+        {
+          "text": "Owned end-to-end user acceptance testing (UAT): designed test plans, executed test cases, and validated system functionality before production deployment.",
+          "tags": [
+            "business-systems-analyst",
+            "implementation-specialist",
+            "technical-program-manager"
+          ],
+          "weight": {
+            "business-systems-analyst": 9,
+            "implementation-specialist": 9,
+            "technical-program-manager": 6
+          }
+        },
+        {
+          "text": "Served as technical liaison between engineering, product management, and operations teams to translate business requirements into system architecture decisions.",
+          "tags": [
+            "business-systems-analyst",
+            "technical-program-manager",
+            "implementation-specialist"
+          ],
+          "weight": {
+            "business-systems-analyst": 10,
+            "technical-program-manager": 7,
+            "implementation-specialist": 6
+          }
+        }
+      ]
+    },
+    {
+      "company": "Amazon",
+      "title": "Data Analyst / Developer",
+      "location": "Seattle, WA",
+      "start": "2014-10",
+      "end": "2016-07",
+      "tags": [],
+      "bullets": [
+        {
+          "text": "Built automated reporting pipelines using SQL and Python, integrating data from multiple interdepartmental sources into real-time, daily, and weekly productivity dashboards.",
+          "tags": [
+            "automation-engineer",
+            "business-systems-analyst",
+            "technical-support-engineer"
+          ],
+          "weight": {
+            "automation-engineer": 9,
+            "business-systems-analyst": 8,
+            "technical-support-engineer": 5
+          }
+        },
+        {
+          "text": "Collaborated with data engineering teams to design ETL processes that incorporated new data sources into the seller support analytics ecosystem, enabling operations to pinpoint capacity gaps.",
+          "tags": [
+            "automation-engineer",
+            "business-systems-analyst",
+            "technical-program-manager"
+          ],
+          "weight": {
+            "automation-engineer": 8,
+            "business-systems-analyst": 8,
+            "technical-program-manager": 4
+          }
+        },
+        {
+          "text": "Administered third-party workforce management software; wrote custom queries and configuration scripts to meet operational capacity planning needs.",
+          "tags": [
+            "technical-support-engineer",
+            "implementation-specialist",
+            "business-systems-analyst"
+          ],
+          "weight": {
+            "technical-support-engineer": 7,
+            "implementation-specialist": 6,
+            "business-systems-analyst": 6
+          }
+        }
+      ]
+    },
+    {
+      "company": "Amazon",
+      "title": "Workforce Analyst",
+      "location": "Seattle, WA",
+      "start": "2012-09",
+      "end": "2014-10",
+      "tags": [],
+      "bullets": [
+        {
+          "text": "Designed and implemented a data-driven variable scheduling system (FLEX) that increased staffing efficiency from 67% to 89% and raised service levels site-wide.",
+          "tags": [
+            "business-systems-analyst",
+            "automation-engineer",
+            "technical-program-manager"
+          ],
+          "weight": {
+            "business-systems-analyst": 9,
+            "automation-engineer": 6,
+            "technical-program-manager": 5
+          }
+        },
+        {
+          "text": "Scoped technical requirements and led onboarding onto third-party workforce management software, defining configuration specifications and data integration points.",
+          "tags": [
+            "implementation-specialist",
+            "business-systems-analyst",
+            "technical-support-engineer"
+          ],
+          "weight": {
+            "implementation-specialist": 9,
+            "business-systems-analyst": 7,
+            "technical-support-engineer": 4
+          }
+        }
+      ]
+    },
+    {
+      "company": "Amazon",
+      "title": "Seller Support Lead / Associate",
+      "location": "Seattle, WA",
+      "start": "2010-08",
+      "end": "2012-09",
+      "tags": [],
+      "bullets": [
+        {
+          "text": "Led a team of 10 associates resolving complex technical issues for sellers; promoted to exclusively supporting top-grossing sellers ($10M+ revenue) managing international inventory and fulfillment.",
+          "tags": [
+            "technical-support-engineer",
+            "implementation-specialist",
+            "technical-program-manager"
+          ],
+          "weight": {
+            "technical-support-engineer": 9,
+            "implementation-specialist": 5,
+            "technical-program-manager": 5
+          }
+        },
+        {
+          "text": "Used performance data analysis to identify workflow inefficiencies and redirect operational support, reducing escalated calls site-wide.",
+          "tags": [
+            "technical-support-engineer",
+            "business-systems-analyst",
+            "automation-engineer"
+          ],
+          "weight": {
+            "technical-support-engineer": 7,
+            "business-systems-analyst": 6,
+            "automation-engineer": 3
+          }
+        }
+      ]
+    },
+    {
+      "company": "United States Air Force",
+      "title": "Aircrew Egress Systems Technician",
+      "location": "United States",
+      "start": "2001-08",
+      "end": "2004-07",
+      "tags": [],
+      "bullets": [
+        {
+          "text": "Maintained and inspected ejection systems on A-10 and F-16 aircraft; tracked maintenance actions, tool accountability, and compliance with technical order updates to ensure safety of flight.",
+          "tags": []
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Portunus",
+      "url": "https://github.com/BrandonDHaskell/Portunus",
+      "description": "LAN-first RFID door access control system. ESP32 access modules communicate with a Go server to manage door access for makerspaces, workshops, and small offices. Fully functional end to end and in evaluation with a makerspace as their access control solution.",
+      "stack": [
+        "Go",
+        "SQLite",
+        "Protobuf/gRPC",
+        "C++ (ESP-IDF)",
+        "FreeRTOS",
+        "TLS/HMAC"
+      ],
+      "tags": [
+        "business-systems-analyst",
+        "implementation-specialist",
+        "automation-engineer",
+        "technical-support-engineer",
+        "technical-program-manager"
+      ],
+      "highlights": [
+        {
+          "text": "Implemented defense-in-depth security: TLS backed by a self-managed private CA with firmware certificate pinning, HMAC-SHA256 request signing, keyed credential hashing so raw card IDs are never stored, role-based access control, and append-only audit logging.",
+          "tags": [
+            "technical-program-manager",
+            "implementation-specialist",
+            "technical-support-engineer"
+          ]
+        },
+        {
+          "text": "Built a Task-driven local CI/CD pipeline covering static analysis, race-detector tests, protobuf drift checks, arm64 cross-compilation, and zero-downtime SSH deployment to a Raspberry Pi systemd service.",
+          "tags": [
+            "automation-engineer",
+            "technical-support-engineer"
+          ]
+        },
+        {
+          "text": "Translating a real organization's operational requirements into system capabilities through a hands-on evaluation with a makerspace, including admin workflows for member enrollment, credential management, and module commissioning.",
+          "tags": [
+            "implementation-specialist",
+            "business-systems-analyst"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Personal Website",
+      "url": "https://brandondhaskell.com",
+      "description": "Production website served from AWS EC2 behind Cloudflare. Nginx serves a compiled React single-page application and reverse proxies API requests to a Go backend service, keeping the API off the public network.",
+      "stack": [
+        "React",
+        "TypeScript",
+        "Go",
+        "Nginx",
+        "AWS EC2",
+        "Cloudflare"
+      ],
+      "tags": [
+        "business-systems-analyst",
+        "implementation-specialist",
+        "automation-engineer",
+        "technical-support-engineer",
+        "technical-program-manager"
+      ],
+      "highlights": [
+        {
+          "text": "Architected the full request path: Cloudflare for DNS, TLS termination, WAF protection, and edge caching; a persistent Elastic IP into an AWS VPC; and Nginx routing /api/* to a compiled Go service on a local port.",
+          "tags": [
+            "technical-support-engineer",
+            "implementation-specialist"
+          ]
+        },
+        {
+          "text": "Own the complete lifecycle: architecture, implementation, deployment, HTTPS hardening, and ongoing operations.",
+          "tags": [
+            "automation-engineer",
+            "technical-support-engineer"
+          ]
+        }
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "category": "Languages & Data",
+      "items": [
+        "Python",
+        "SQL (MySQL, PostgreSQL)",
+        "Go",
+        "JavaScript/TypeScript",
+        "C++ (ESP-IDF)"
+      ],
+      "tags": []
+    },
+    {
+      "category": "Systems & Cloud",
+      "items": [
+        "Linux",
+        "AWS (EC2, S3, DynamoDB)",
+        "Nginx",
+        "Cloudflare",
+        "systemd",
+        "Git",
+        "CI/CD (Task-based pipelines)"
+      ],
+      "tags": [
+        "technical-support-engineer",
+        "automation-engineer",
+        "implementation-specialist",
+        "technical-program-manager"
+      ]
+    },
+    {
+      "category": "Data & Integration",
+      "items": [
+        "REST APIs",
+        "gRPC and Protobuf",
+        "ETL and data pipelines",
+        "SQLite",
+        "Reporting and dashboards"
+      ],
+      "tags": [
+        "business-systems-analyst",
+        "automation-engineer"
+      ]
+    },
+    {
+      "category": "Security & Process",
+      "items": [
+        "TLS and private CA management",
+        "HMAC request signing",
+        "Role-based access control",
+        "HIPAA compliance",
+        "User Acceptance Testing (UAT)",
+        "Requirements gathering",
+        "Agile/Scrum",
+        "JIRA"
+      ],
+      "tags": [
+        "business-systems-analyst",
+        "implementation-specialist",
+        "technical-program-manager"
+      ]
+    },
+    {
+      "category": "AI-Assisted Development",
+      "items": [
+        "Claude Code",
+        "Cursor",
+        "GitHub Copilot",
+        "Prompt engineering"
+      ],
+      "tags": [
+        "automation-engineer",
+        "technical-support-engineer"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "University of North Dakota",
+      "credential": "B.S. in General Studies, Minor in Professional Flight & Psychology",
+      "year": null
+    },
+    {
+      "institution": "UC Berkeley Extension",
+      "credential": "Full Stack Web Development Certificate (MERN)",
+      "year": null
+    }
+  ]
+}
