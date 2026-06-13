@@ -2,7 +2,7 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 import { validateResumeData } from '../src/utils/validateResumeData';
 
-const dataPath = join(__dirname, '../src/data/resume.master.json');
+const dataPath = join(__dirname, '../src/data/resumeData.json');
 const raw = JSON.parse(readFileSync(dataPath, 'utf-8'));
 const { errors, warnings } = validateResumeData(raw);
 

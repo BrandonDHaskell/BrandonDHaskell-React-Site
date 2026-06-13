@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Download, Loader2 } from 'lucide-react';
 
-import masterData from '../../data/resume.master.json';
+import masterData from '../../data/resumeData.json';
 import { useRoleSelection } from '../../hooks/useRoleSelection';
 import { useResumeView } from '../../hooks/useResumeView';
 import { ResumeData, RoleSelection } from '../../types/resume';
